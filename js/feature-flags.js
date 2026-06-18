@@ -146,36 +146,6 @@
     }
   }
 
-  // Sync checkboxes to state
-  function syncCheckboxes() {
-    document.querySelectorAll('.ff-toggle[data-flag]').forEach(toggle => {
-      const flagName = toggle.getAttribute('data-flag');
-      const checkbox = toggle.querySelector('input[type="checkbox"]');
-      if (checkbox) {
-        checkbox.checked = flags[flagName] !== false;
-      }
-    });
-  }
-
-  // Panel open/close
-  function openPanel() {
-    document.getElementById('ffPanel').classList.add('open');
-    document.getElementById('ffOverlay').classList.add('open');
-  }
-
-  function closePanel() {
-    document.getElementById('ffPanel').classList.remove('open');
-    document.getElementById('ffOverlay').classList.remove('open');
-  }
-
-  // Reset all
-  function resetAll() {
-    flags = { ...defaultFlags }; // Reset to JSON defaults
-    saveFlags();
-    syncCheckboxes();
-    applyAllFlags();
-  }
-
   // Init
   async function init() {
     await loadDefaultFlags();
@@ -192,51 +162,8 @@
     // Apply flags after a short delay so DOM is ready
     requestAnimationFrame(() => {
       applyAllFlags();
-      syncCheckboxes();
     });
 
-    // Trigger button
-    document.getElementById('ffTrigger').addEventListener('click', openPanel);
-
-    // Close
-    document.getElementById('ffClose').addEventListener('click', closePanel);
-    document.getElementById('ffOverlay').addEventListener('click', closePanel);
-
-    // Reset
-    document.getElementById('ffReset').addEventListener('click', resetAll);
-
-    // Toggle changes
-    document.getElementById('ffBody').addEventListener('change', (e) => {
-      const toggle = e.target.closest('.ff-toggle[data-flag]');
-      if (!toggle) return;
-
-      const flagName = toggle.getAttribute('data-flag');
-      const checkbox = toggle.querySelector('input[type="checkbox"]');
-      const isEnabled = checkbox.checked;
-
-      flags[flagName] = isEnabled;
-      saveFlags();
-      applyFlag(flagName, isEnabled);
-    });
-
-    // Hero variant dropdown
-    const heroVariantSelect = document.getElementById('heroVariantSelect');
-    if (heroVariantSelect) {
-      // Set current value
-      heroVariantSelect.value = flags['hero-variant'] || 'orbital';
-
-      heroVariantSelect.addEventListener('change', () => {
-        flags['hero-variant'] = heroVariantSelect.value;
-        saveFlags();
-        // Reload to apply the new hero variant (content-loader re-renders on load)
-        window.location.reload();
-      });
-    }
-
-    // Keyboard: Escape to close
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closePanel();
-    });
   }
 
   if (document.readyState === 'loading') {
