@@ -17,11 +17,7 @@ window.initializeAnimations = function() {
     requestAnimationFrame(raf);
   }
 
-  // ---------- 2. Custom Cursor ----------
-  if (f['custom-cursor'] !== false && typeof kursor !== 'undefined' && !window._kursorInit) {
-    window._kursorInit = true;
-    new kursor({ type: 1, color: '#e94560' });
-  }
+
 
   // ---------- 3. GSAP ScrollTrigger (Premium Reveal) ----------
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -32,9 +28,9 @@ window.initializeAnimations = function() {
       // Remove any CSS transitions so GSAP can take over smoothly
       el.style.transition = 'none';
       gsap.fromTo(el, 
-        { y: 60, opacity: 0, filter: "blur(2px)" },
+        { y: 60, opacity: 0 },
         { 
-          y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2, ease: "power3.out",
+          y: 0, opacity: 1, duration: 1.2, ease: "power3.out",
           scrollTrigger: {
             trigger: el,
             start: "top 85%",
@@ -170,7 +166,6 @@ window.initializeAnimations = function() {
         },
         opacity: 0,
         y: 15,
-        filter: "blur(4px)",
         duration: 0.8,
         stagger: 0.015,
         ease: "power2.out"
@@ -192,7 +187,6 @@ window.initializeAnimations = function() {
         },
         opacity: 0,
         x: -10,
-        filter: "blur(2px)",
         duration: 0.6,
         stagger: 0.04,
         ease: "power2.out"
@@ -241,10 +235,9 @@ window.initializeAnimations = function() {
     tiltElements.forEach(el => {
       el.classList.add('tilt-applied');
       VanillaTilt.init(el, {
-        max: 12,
+        max: 8,
         speed: 400,
-        glare: true,
-        "max-glare": 0.2,
+        glare: false,
         scale: 1.02
       });
     });
