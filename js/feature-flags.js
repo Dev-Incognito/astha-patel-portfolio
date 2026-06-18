@@ -11,6 +11,7 @@
   // Flag-to-DOM mapping
   const FLAG_MAP = {
     // Global
+    'gift-wrap':         { action: 'hide', selector: '#giftWrap' },
     'animations':        { action: 'class-toggle', target: 'body', className: 'no-animations' },
     'scroll-progress':   { action: 'hide', selector: '.scroll-progress' },
     'navigation':        { action: 'hide', selector: '#mainNav' },
@@ -162,6 +163,21 @@
     // Apply flags after a short delay so DOM is ready
     requestAnimationFrame(() => {
       applyAllFlags();
+      
+      // Setup gift wrap interaction
+      const giftWrap = document.getElementById('giftWrap');
+      if (giftWrap && giftWrap.style.display !== 'none') {
+        // Prevent scrolling while wrapped
+        document.body.style.overflow = 'hidden';
+        giftWrap.addEventListener('click', () => {
+          giftWrap.classList.add('unwrapping');
+          // Allow scrolling again and hide element after animation
+          setTimeout(() => {
+            document.body.style.overflow = '';
+            giftWrap.style.display = 'none';
+          }, 1500);
+        }, { once: true });
+      }
     });
 
   }
