@@ -2406,7 +2406,7 @@ a {
   top: 0;
   bottom: 0;
   width: 50%;
-  background: linear-gradient(135deg, #1a1625 0%, #0d0b13 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f3ede2 100%);
   transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   z-index: 1;
 }
@@ -2427,10 +2427,10 @@ a {
   left: 0;
   right: 0;
   height: 40px;
-  background: var(--acc);
+  background: #c3272b;
   transform: translateY(-50%);
   z-index: 2;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15), inset 0 3px 6px rgba(255,255,255,0.25), inset 0 -3px 6px rgba(0,0,0,0.2);
   transition: opacity 0.5s ease;
 }
 
@@ -2440,10 +2440,10 @@ a {
   bottom: 0;
   left: 50%;
   width: 40px;
-  background: var(--acc);
+  background: #c3272b;
   transform: translateX(-50%);
   z-index: 2;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15), inset 3px 0 6px rgba(255,255,255,0.25), inset -3px 0 6px rgba(0,0,0,0.2);
   transition: opacity 0.5s ease;
 }
 
@@ -2456,24 +2456,25 @@ a {
 .gift-bow-center {
   width: 30px;
   height: 30px;
-  background: #a95d69;
+  background: #9b1e22;
   border-radius: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: inset 0 -2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 -4px 6px rgba(0,0,0,0.3);
 }
 
 .gift-bow-left,
 .gift-bow-right {
   width: 60px;
   height: 60px;
-  border: 15px solid var(--acc);
+  border: 15px solid #c3272b;
   border-radius: 50% 50% 0 50%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15));
 }
 
 .gift-bow-left {
