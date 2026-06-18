@@ -2,13 +2,34 @@
   "global": {
     "navBrand": "Astha Patel",
     "navLinks": [
-      { "id": "brand", "label": "Brand" },
-      { "id": "strengths", "label": "Strengths" },
-      { "id": "differentiators", "label": "What Sets Me Apart" },
-      { "id": "exposure", "label": "Business Exposure" },
-      { "id": "capabilities", "label": "Capabilities" },
-      { "id": "vision", "label": "Vision" },
-      { "id": "contact", "label": "Contact" }
+      {
+        "id": "brand",
+        "label": "Brand"
+      },
+      {
+        "id": "strengths",
+        "label": "Strengths"
+      },
+      {
+        "id": "differentiators",
+        "label": "What Sets Me Apart"
+      },
+      {
+        "id": "exposure",
+        "label": "Business Exposure"
+      },
+      {
+        "id": "capabilities",
+        "label": "Capabilities"
+      },
+      {
+        "id": "vision",
+        "label": "Vision"
+      },
+      {
+        "id": "contact",
+        "label": "Contact"
+      }
     ],
     "footerBrand": "Astha Patel",
     "footerText": "Personal Brand Portfolio"
@@ -16,7 +37,12 @@
   "hero": {
     "nameFirst": "Astha",
     "nameLast": "Patel",
-    "tagline": ["People", "Trust", "Excellence"],
+    "tagline": [
+      "People",
+      "Trust",
+      "Excellence",
+      "Test"
+    ],
     "statement": "A people-first professional who turns everyday interactions into lasting relationships, with warmth, composure, and a quiet confidence that speaks for itself.",
     "scrollBtn": "Discover More"
   },
@@ -26,10 +52,26 @@
     "sectionSubtitle": "I'm Astha. Nineteen, bilingual in Hindi and English, and someone who has always been drawn to people. Not in an abstract sense, but in the way that makes me genuinely curious about the person sitting across from me, what they need, and how I can help.",
     "quote": "I grew up watching my family build a real estate business from the ground up. What stayed with me wasn't the numbers or the deals. It was how the best outcomes always came down to one thing: trust. That shaped everything about how I show up professionally. I don't chase transactions. I build relationships. And I've found that when you genuinely care about people, the results follow naturally.",
     "values": [
-      { "icon": "I", "title": "Integrity", "desc": "Honesty is not a strategy for me. It's a default. I would rather tell someone what they need to hear than what they want to hear, and that consistency is something people learn to rely on." },
-      { "icon": "E", "title": "Excellence", "desc": "I hold myself to a higher standard than most people my age, not because someone asked me to, but because I would not feel right doing less than my best." },
-      { "icon": "G", "title": "Growth", "desc": "I chose to step into the professional world early. That was not a setback. It was a decision to learn by doing, and I have not stopped learning since." },
-      { "icon": "R", "title": "Respect", "desc": "Whether it is a senior executive or someone walking in for the first time, I treat every person with the same care and attention. Everyone deserves to feel heard." }
+      {
+        "icon": "I",
+        "title": "Integrity",
+        "desc": "Honesty is not a strategy for me. It's a default. I would rather tell someone what they need to hear than what they want to hear, and that consistency is something people learn to rely on."
+      },
+      {
+        "icon": "E",
+        "title": "Excellence",
+        "desc": "I hold myself to a higher standard than most people my age, not because someone asked me to, but because I would not feel right doing less than my best."
+      },
+      {
+        "icon": "G",
+        "title": "Growth",
+        "desc": "I chose to step into the professional world early. That was not a setback. It was a decision to learn by doing, and I have not stopped learning since."
+      },
+      {
+        "icon": "R",
+        "title": "Respect",
+        "desc": "Whether it is a senior executive or someone walking in for the first time, I treat every person with the same care and attention. Everyone deserves to feel heard."
+      }
     ],
     "philosophyTitle": "Professional Philosophy",
     "philosophyText": "The way I see it, every organisation's reputation is built one conversation at a time. Every phone call, every handshake, every moment when a customer decides whether they trust you. Those small interactions are where real brand loyalty is won or lost. I take those moments seriously because <strong style=\"font-weight: 600; color: var(--charcoal);\">I am not just representing myself. I am representing the people who trusted me to be there.</strong>"
@@ -44,21 +86,39 @@
         "role": "Making People Feel Welcome",
         "company": "The Foundation of Everything I Do",
         "desc": "I have spent years being the first person someone sees when they walk through a door. I learned quickly that a genuine smile and real attention can completely change someone's experience. I do not follow a script. I read the room, adjust my approach, and make sure every person feels like they matter. Because they do.",
-        "skills": ["Customer Engagement", "First Impressions", "Rapport Building", "Active Listening", "Professional Warmth"]
+        "skills": [
+          "Customer Engagement",
+          "First Impressions",
+          "Rapport Building",
+          "Active Listening",
+          "Professional Warmth"
+        ]
       },
       {
         "period": "Communication",
         "role": "Clear, Calm, and Confident",
         "company": "In Any Situation, With Any Audience",
         "desc": "I communicate fluently in both Hindi and English, and I know how to adjust my tone depending on who I am speaking with. A frustrated customer needs patience and empathy. A business client needs clarity and confidence. A colleague needs directness and support. I switch between these naturally. It is not something I have to think about.",
-        "skills": ["Bilingual Communication", "Conflict Resolution", "Persuasive Communication", "Professional Correspondence", "Stakeholder Communication"]
+        "skills": [
+          "Bilingual Communication",
+          "Conflict Resolution",
+          "Persuasive Communication",
+          "Professional Correspondence",
+          "Stakeholder Communication"
+        ]
       },
       {
         "period": "Emotional Intelligence",
         "role": "Reading Between the Lines",
         "company": "Understanding What People Actually Need",
         "desc": "Some of the most important things a person tells you are the things they never say out loud. I have learned to pick up on body language, tone shifts, and hesitation. When someone says 'I am fine' but clearly is not, I notice. When a customer is confused but too polite to ask, I step in. That awareness comes naturally to me, and it changes the quality of every interaction I have.",
-        "skills": ["Empathy", "Situational Awareness", "Patience", "Trust Building", "Composure Under Pressure"]
+        "skills": [
+          "Empathy",
+          "Situational Awareness",
+          "Patience",
+          "Trust Building",
+          "Composure Under Pressure"
+        ]
       }
     ]
   },
@@ -67,12 +127,36 @@
     "sectionTitle": "Beyond the Ordinary",
     "sectionSubtitle": "These are the things people notice about me. Not because I tell them, but because they experience it firsthand.",
     "cards": [
-      { "number": "01", "title": "I Adapt Quickly", "desc": "New environment, new team, new industry. I settle in fast. I ask the right questions, observe carefully, and start contributing before most people have finished their orientation. Change does not unsettle me. It motivates me." },
-      { "number": "02", "title": "I Stay Calm When Things Get Difficult", "desc": "Difficult customers, unexpected problems, high-pressure situations. I have handled all of them. I do not get flustered. I slow down, think clearly, and find a way forward. People tend to calm down around me because I stay steady." },
-      { "number": "03", "title": "I Listen. Really Listen.", "desc": "Not the kind of listening where you are waiting for your turn to talk. The kind where you actually hear what someone is trying to tell you, even when they are struggling to say it. That is where real problem solving starts." },
-      { "number": "04", "title": "I Represent a Brand Well", "desc": "People have always told me I carry myself with a maturity beyond my age. I am presentable, well-spoken, and aware of how I come across. When I represent an organisation, people feel confident that I reflect well on the brand." },
-      { "number": "05", "title": "I Build Relationships, Not Transactions", "desc": "A customer who comes back is not coming back for the product. They are coming back because of how they were treated. I understand that. I focus on making every interaction feel personal, not procedural, and that is what creates loyalty." },
-      { "number": "06", "title": "I Take Responsibility Seriously", "desc": "If something is my job, I own it completely. I follow through on commitments, I show up on time, and I do not make excuses. Reliability is one of those quiet qualities that matters more than people realise until they need it most." }
+      {
+        "number": "01",
+        "title": "I Adapt Quickly",
+        "desc": "New environment, new team, new industry. I settle in fast. I ask the right questions, observe carefully, and start contributing before most people have finished their orientation. Change does not unsettle me. It motivates me."
+      },
+      {
+        "number": "02",
+        "title": "I Stay Calm When Things Get Difficult",
+        "desc": "Difficult customers, unexpected problems, high-pressure situations. I have handled all of them. I do not get flustered. I slow down, think clearly, and find a way forward. People tend to calm down around me because I stay steady."
+      },
+      {
+        "number": "03",
+        "title": "I Listen. Really Listen.",
+        "desc": "Not the kind of listening where you are waiting for your turn to talk. The kind where you actually hear what someone is trying to tell you, even when they are struggling to say it. That is where real problem solving starts."
+      },
+      {
+        "number": "04",
+        "title": "I Represent a Brand Well",
+        "desc": "People have always told me I carry myself with a maturity beyond my age. I am presentable, well-spoken, and aware of how I come across. When I represent an organisation, people feel confident that I reflect well on the brand."
+      },
+      {
+        "number": "05",
+        "title": "I Build Relationships, Not Transactions",
+        "desc": "A customer who comes back is not coming back for the product. They are coming back because of how they were treated. I understand that. I focus on making every interaction feel personal, not procedural, and that is what creates loyalty."
+      },
+      {
+        "number": "06",
+        "title": "I Take Responsibility Seriously",
+        "desc": "If something is my job, I own it completely. I follow through on commitments, I show up on time, and I do not make excuses. Reliability is one of those quiet qualities that matters more than people realise until they need it most."
+      }
     ]
   },
   "exposure": {
@@ -83,10 +167,22 @@
     "narrativeP2": "What I took away from all of that was not just how deals get done. It was how <strong>trust gets built</strong>. I saw that the clients who stayed loyal were not the ones who got the best price. They were the ones who felt genuinely cared for. That lesson shaped everything about how I approach professional relationships today.",
     "narrativeP3": "I also learned the practical side. How professional meetings are conducted. How business communication should sound. What it means to follow up properly. And why keeping your word is the most valuable thing you can do in any industry.",
     "highlights": [
-      { "title": "Client-Facing Environments", "desc": "Years of observing and participating in real client interactions, understanding what builds confidence, what creates doubt, and how to navigate both with grace." },
-      { "title": "Professional Meeting Etiquette", "desc": "Comfortable in formal settings. I understand meeting dynamics, know when to speak and when to listen, and carry myself with the composure people expect from experienced professionals." },
-      { "title": "Negotiation Awareness", "desc": "I have watched skilled negotiators find solutions that work for everyone involved. I understand that good negotiation is not about winning. It is about making both sides feel respected and satisfied." },
-      { "title": "Relationship-Driven Business", "desc": "I learned early that repeat business comes from relationships, not marketing. When people trust you, they come back. When they come back, they bring others. That is the cycle I was raised to understand." }
+      {
+        "title": "Client-Facing Environments",
+        "desc": "Years of observing and participating in real client interactions, understanding what builds confidence, what creates doubt, and how to navigate both with grace."
+      },
+      {
+        "title": "Professional Meeting Etiquette",
+        "desc": "Comfortable in formal settings. I understand meeting dynamics, know when to speak and when to listen, and carry myself with the composure people expect from experienced professionals."
+      },
+      {
+        "title": "Negotiation Awareness",
+        "desc": "I have watched skilled negotiators find solutions that work for everyone involved. I understand that good negotiation is not about winning. It is about making both sides feel respected and satisfied."
+      },
+      {
+        "title": "Relationship-Driven Business",
+        "desc": "I learned early that repeat business comes from relationships, not marketing. When people trust you, they come back. When they come back, they bring others. That is the cycle I was raised to understand."
+      }
     ]
   },
   "capabilities": {
@@ -94,15 +190,51 @@
     "sectionTitle": "What I Bring With Me",
     "sectionSubtitle": "These strengths travel with me regardless of the industry, the role, or the title. They are the reason I am confident I can add value wherever I go.",
     "items": [
-      { "title": "Interpersonal Communication", "progress": "95%", "desc": "Warm, clear, and always tuned to the person in front of me" },
-      { "title": "Relationship Building", "progress": "95%", "desc": "Turning one-time interactions into lasting connections" },
-      { "title": "Emotional Intelligence", "progress": "92%", "desc": "Understanding the unsaid and responding with care" },
-      { "title": "Professional Presentation", "progress": "90%", "desc": "Polished, composed, and always appropriate to the setting" },
-      { "title": "Adaptability", "progress": "93%", "desc": "Comfortable with new people, new places, and new challenges" },
-      { "title": "Composure Under Pressure", "progress": "88%", "desc": "Steady, focused, and clear-headed when things get intense" },
-      { "title": "Customer Service Excellence", "progress": "94%", "desc": "Creating positive experiences that people remember" },
-      { "title": "Team Collaboration", "progress": "90%", "desc": "Reliable, supportive, and always pulling my weight" },
-      { "title": "Organisation and Follow-Through", "progress": "87%", "desc": "If I say I will do something, it gets done. On time. Properly." }
+      {
+        "title": "Interpersonal Communication",
+        "progress": "95%",
+        "desc": "Warm, clear, and always tuned to the person in front of me"
+      },
+      {
+        "title": "Relationship Building",
+        "progress": "95%",
+        "desc": "Turning one-time interactions into lasting connections"
+      },
+      {
+        "title": "Emotional Intelligence",
+        "progress": "92%",
+        "desc": "Understanding the unsaid and responding with care"
+      },
+      {
+        "title": "Professional Presentation",
+        "progress": "90%",
+        "desc": "Polished, composed, and always appropriate to the setting"
+      },
+      {
+        "title": "Adaptability",
+        "progress": "93%",
+        "desc": "Comfortable with new people, new places, and new challenges"
+      },
+      {
+        "title": "Composure Under Pressure",
+        "progress": "88%",
+        "desc": "Steady, focused, and clear-headed when things get intense"
+      },
+      {
+        "title": "Customer Service Excellence",
+        "progress": "94%",
+        "desc": "Creating positive experiences that people remember"
+      },
+      {
+        "title": "Team Collaboration",
+        "progress": "90%",
+        "desc": "Reliable, supportive, and always pulling my weight"
+      },
+      {
+        "title": "Organisation and Follow-Through",
+        "progress": "87%",
+        "desc": "If I say I will do something, it gets done. On time. Properly."
+      }
     ]
   },
   "vision": {
@@ -110,9 +242,21 @@
     "sectionTitle": "Where I Am Heading",
     "statement": "I want to be in a role where my <em>ability to connect with people</em> is not just a nice addition to the work. It is the work. I want to build a career where trust, communication, and genuine human care drive real results for the organisation I am part of.",
     "pillars": [
-      { "icon": "Now", "title": "Right Now", "desc": "Find a role where I can put my interpersonal strengths to work immediately. Contributing to client satisfaction, team morale, and the kind of first impressions that define an organisation's reputation." },
-      { "icon": "Next", "title": "Next Chapter", "desc": "Grow into someone clients specifically ask for. Become the person who understands their needs so well that they do not just trust me, they rely on me. That is the kind of professional I am working to become." },
-      { "icon": "Future", "title": "Long-Term", "desc": "Eventually, I want to lead. Not from a corner office, but from the front lines. Mentoring others, shaping how an organisation treats its clients, and proving that empathy and professionalism are not opposites. They are the same thing." }
+      {
+        "icon": "Now",
+        "title": "Right Now",
+        "desc": "Find a role where I can put my interpersonal strengths to work immediately. Contributing to client satisfaction, team morale, and the kind of first impressions that define an organisation's reputation."
+      },
+      {
+        "icon": "Next",
+        "title": "Next Chapter",
+        "desc": "Grow into someone clients specifically ask for. Become the person who understands their needs so well that they do not just trust me, they rely on me. That is the kind of professional I am working to become."
+      },
+      {
+        "icon": "Future",
+        "title": "Long-Term",
+        "desc": "Eventually, I want to lead. Not from a corner office, but from the front lines. Mentoring others, shaping how an organisation treats its clients, and proving that empathy and professionalism are not opposites. They are the same thing."
+      }
     ],
     "closingQuote": "\"I am not looking for just a job. I am looking for a place that values what I bring as a person, and gives me the space to grow into someone even better.\""
   },
@@ -133,10 +277,26 @@
     "cardName": "Astha Patel",
     "cardTagline": "People . Trust . Excellence",
     "info": [
-      { "icon": "E", "label": "Email", "text": "astha.patel@email.com" },
-      { "icon": "P", "label": "Phone", "text": "+91 XXXXX XXXXX" },
-      { "icon": "L", "label": "Location", "text": "Khalilabad, Sant Kabir Nagar, UP" },
-      { "icon": "S", "label": "Languages", "text": "English and Hindi" }
+      {
+        "icon": "E",
+        "label": "Email",
+        "text": "astha.patel@email.com"
+      },
+      {
+        "icon": "P",
+        "label": "Phone",
+        "text": "+91 XXXXX XXXXX"
+      },
+      {
+        "icon": "L",
+        "label": "Location",
+        "text": "Khalilabad, Sant Kabir Nagar, UP"
+      },
+      {
+        "icon": "S",
+        "label": "Languages",
+        "text": "English and Hindi"
+      }
     ],
     "footer": "\"I would welcome the chance to introduce myself properly and show you what I can bring to your team.\"",
     "references": "References available upon request",
