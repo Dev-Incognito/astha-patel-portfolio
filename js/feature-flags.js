@@ -12,6 +12,8 @@
   const FLAG_MAP = {
     // Global
     'gift-wrap':         { action: 'hide', selector: '#giftWrap' },
+    'lenis-scroll':      { action: 'js-flag' },
+    'custom-cursor':     { action: 'js-flag' },
     'animations':        { action: 'class-toggle', target: 'body', className: 'no-animations' },
     'scroll-progress':   { action: 'hide', selector: '.scroll-progress' },
     'navigation':        { action: 'hide', selector: '#mainNav' },
@@ -171,6 +173,14 @@
         document.body.style.overflow = 'hidden';
         giftWrap.addEventListener('click', () => {
           giftWrap.classList.add('unwrapping');
+          if (typeof confetti !== 'undefined') {
+            const duration = 3000; const end = Date.now() + duration;
+            (function frame() {
+              confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#e94560', '#C2727E', '#ffffff'] });
+              confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#e94560', '#C2727E', '#ffffff'] });
+              if (Date.now() < end) requestAnimationFrame(frame);
+            }());
+          }
           // Allow scrolling again and hide element after animation
           setTimeout(() => {
             document.body.style.overflow = '';

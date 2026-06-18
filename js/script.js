@@ -7,40 +7,74 @@
 // after dynamic content is injected into the DOM.
 window.initializeAnimations = function() {
 
-  // ---------- Scroll Reveal - REPLAY on scroll back ----------
-  const revealElements = document.querySelectorAll('.reveal:not(.observed)');
+  const f = window.__featureFlags || {};
 
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+  // ---------- 1. Lenis Smooth Scroll ----------
+  if (f['lenis-scroll'] !== false && typeof Lenis !== 'undefined' && !window._lenisInit) {
+    window._lenisInit = true;
+    const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
 
-        // Re-animate capability bars inside this element
-        const bars = entry.target.querySelectorAll('.cap-bar');
-        bars.forEach((bar, i) => {
-          bar.classList.remove('animate');
-          void bar.offsetWidth; // force reflow to reset scaleX
-          setTimeout(() => bar.classList.add('animate'), 200 + i * 100);
-        });
+  // ---------- 2. Custom Cursor ----------
+  if (f['custom-cursor'] !== false && typeof kursor !== 'undefined' && !window._kursorInit) {
+    window._kursorInit = true;
+    new kursor({ type: 1, color: '#e94560' });
+  }
 
-      } else {
-        // Remove visible so it replays next time it enters
-        entry.target.classList.remove('visible');
-
-        // Reset bars so they animate again on re-entry
-        const bars = entry.target.querySelectorAll('.cap-bar');
-        bars.forEach(bar => bar.classList.remove('animate'));
-      }
+  // ---------- 3. GSAP ScrollTrigger (Premium Reveal) ----------
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    document.querySelectorAll('.reveal:not(.gsap-observed)').forEach(el => {
+      el.classList.add('gsap-observed');
+      // Remove any CSS transitions so GSAP can take over smoothly
+      el.style.transition = 'none';
+      gsap.fromTo(el, 
+        { y: 60, opacity: 0 },
+        { 
+          y: 0, opacity: 1, duration: 1.2, ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
     });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -60px 0px'
-  });
+  } else {
+    // Fallback Intersection Observer if GSAP fails to load
+    const revealElements = document.querySelectorAll('.reveal:not(.observed)');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    revealElements.forEach(el => { el.classList.add('observed'); revealObserver.observe(el); });
+  }
 
-  revealElements.forEach(el => {
-    el.classList.add('observed');
-    revealObserver.observe(el);
-  });
+  // ---------- 5. Premium Typing Animation (TypeIt) ----------
+  if (typeof TypeIt !== 'undefined' && !window._typeItInit) {
+    const taglineEl = document.querySelector('.hero-tagline, .hero-cin-tagline-small, .hero-pro-tagline');
+    if (taglineEl && taglineEl.textContent.trim().length > 0) {
+      window._typeItInit = true;
+      // Extract text and hide original
+      const originalHTML = taglineEl.innerHTML;
+      taglineEl.innerHTML = '';
+      new TypeIt(taglineEl, {
+        strings: originalHTML,
+        speed: 50,
+        html: true,
+        cursor: false,
+        waitUntilVisible: true
+      }).go();
+    }
+  }
 
   // ---------- Diff numbers - replay ----------
   const diffNumbers = document.querySelectorAll('.diff-number:not(.diff-observed)');
@@ -77,32 +111,20 @@ window.initializeAnimations = function() {
     barObserver.observe(bar);
   });
 
-  // ---------- Magnetic Hover on Cards ----------
-  const cards = document.querySelectorAll('.value-card, .diff-card, .cap-item, .vision-pillar, .biz-highlight');
-  cards.forEach(card => {
-    if (card.dataset.tiltBound) return;
-    card.dataset.tiltBound = 'true';
-
-    card.addEventListener('mousemove', (e) => {
-      if (window.__featureFlags && window.__featureFlags['magnetic-hover'] === false) return;
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const rotateX = (y - rect.height / 2) / 20;
-      const rotateY = (rect.width / 2 - x) / 20;
-      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-      const px = (x / rect.width) * 100;
-      const py = (y / rect.height) * 100;
-      card.style.setProperty('--spotlight-x', px + '%');
-      card.style.setProperty('--spotlight-y', py + '%');
-      card.classList.add('has-spotlight');
+  // ---------- 4. Premium 3D Tilt Hover ----------
+  if (typeof VanillaTilt !== 'undefined' && window.__featureFlags && window.__featureFlags['magnetic-hover'] !== false) {
+    const tiltElements = document.querySelectorAll('.value-card:not(.tilt-applied), .diff-card:not(.tilt-applied), .cap-item:not(.tilt-applied), .vision-pillar:not(.tilt-applied), .biz-highlight:not(.tilt-applied), .hero-pro-img-wrap:not(.tilt-applied), .hero-art-portrait:not(.tilt-applied), .contact-avatar:not(.tilt-applied)');
+    tiltElements.forEach(el => {
+      el.classList.add('tilt-applied');
+      VanillaTilt.init(el, {
+        max: 12,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+        scale: 1.02
+      });
     });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-      card.classList.remove('has-spotlight');
-    });
-  });
+  }
 
   // ---------- Text data-text for section titles ----------
   document.querySelectorAll('.section-title').forEach(title => {
