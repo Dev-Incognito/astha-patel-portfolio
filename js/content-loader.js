@@ -122,37 +122,136 @@ function renderHeroCinematic(data) {
   `;
 }
 
-function renderHeroEditorial(data) {
+function renderHeroGalaxy(data) {
   const hero = document.getElementById('hero');
-  hero.className = 'hero hero--editorial';
+  hero.className = 'hero hero--galaxy';
+  hero.innerHTML = `
+    <div class="hero-gal-bg">
+      <div class="hero-gal-stars"></div>
+      <div class="hero-gal-nebula"></div>
+    </div>
+    <div class="hero-gal-content">
+      <div class="hero-gal-orb"></div>
+      <div class="hero-gal-portrait-wrap">
+        <img src="assets/portrait.png" alt="${data.hero.nameFirst}" fetchpriority="high">
+      </div>
+      <div class="hero-gal-text">
+        <h1 class="hero-gal-name">${data.hero.nameFirst} <span>${data.hero.nameLast}</span></h1>
+        <div class="hero-gal-tagline">
+          ${data.hero.tagline.map(t => `<span class="gal-tag">${t}</span>`).join('<span class="gal-sep">✦</span>')}
+        </div>
+        <p class="hero-gal-statement">${data.hero.statement}</p>
+        <button class="hero-gal-btn" onclick="scrollToSection('brand')">${data.hero.scrollBtn}</button>
+      </div>
+    </div>
+  `;
+}
 
-  // Build double marquee text for seamless loop
-  const marqueeText = Array(8).fill(null).map(() =>
-    data.hero.tagline.map(t => `<span>${t}</span>`).join('<span class="dot-sep">·</span>')
-  ).join('<span class="dot-sep" style="padding:0 16px">·</span>');
+function renderHeroPookie(data) {
+  const hero = document.getElementById('hero');
+  hero.className = 'hero hero--pookie';
+  hero.innerHTML = `
+    <div class="hero-pook-bg">
+      <div class="pook-cloud pook-cloud-1"></div>
+      <div class="pook-cloud pook-cloud-2"></div>
+      <div class="pook-sparkles"></div>
+    </div>
+    <div class="hero-pook-content">
+      <div class="hero-pook-card">
+        <div class="hero-pook-portrait">
+          <img src="assets/portrait.png" alt="${data.hero.nameFirst}">
+          <div class="pook-heart">💖</div>
+          <div class="pook-heart pook-h2">✨</div>
+        </div>
+        <h1 class="hero-pook-name">${data.hero.nameFirst} ${data.hero.nameLast}</h1>
+        <div class="hero-pook-tagline">
+          ${data.hero.tagline.map(t => `<span class="pook-badge">${t}</span>`).join('')}
+        </div>
+        <p class="hero-pook-statement">${data.hero.statement}</p>
+        <button class="hero-pook-btn" onclick="scrollToSection('brand')">${data.hero.scrollBtn} 💕</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderHeroModern(data) {
+  const hero = document.getElementById('hero');
+  hero.className = 'hero hero--modern';
+  const marqueeText = Array(10).fill(null).map(() =>
+    data.hero.tagline.map(t => `<span>${t}</span>`).join('<span class="mod-star">★</span>')
+  ).join('<span class="mod-star">★</span>');
 
   hero.innerHTML = `
-    <div class="hero-ed-bg-text" aria-hidden="true">
-      <div class="hero-ed-bg-first">${data.hero.nameFirst}</div>
-      <div class="hero-ed-bg-last">${data.hero.nameLast}</div>
+    <div class="hero-mod-marquee-top">
+      <div class="mod-marquee-inner">${marqueeText}</div>
     </div>
-    <div class="hero-ed-center">
-      <div class="hero-ed-portrait-wrap">
-        <img src="assets/portrait.png" alt="${data.hero.nameFirst} ${data.hero.nameLast}" fetchpriority="high">
-        <span class="hero-ed-float-tag">People</span>
-        <span class="hero-ed-float-tag">Excellence</span>
-        <span class="hero-ed-float-tag">Trust</span>
+    <div class="hero-mod-grid">
+      <div class="mod-cell mod-cell-1">
+        <h1 class="hero-mod-name">${data.hero.nameFirst}<br>${data.hero.nameLast}</h1>
       </div>
-      <div class="hero-ed-name-block">
-        <h1 class="hero-ed-name">${data.hero.nameFirst} ${data.hero.nameLast}</h1>
-        <p class="hero-ed-statement">${data.hero.statement}</p>
-        <div class="hero-ed-scroll-hint" onclick="scrollToSection('brand')">
-          <span>Discover</span>
+      <div class="mod-cell mod-cell-2">
+        <img src="assets/portrait.png" alt="${data.hero.nameFirst}">
+      </div>
+      <div class="mod-cell mod-cell-3">
+        <p class="hero-mod-statement">${data.hero.statement}</p>
+        <button class="hero-mod-btn" onclick="scrollToSection('brand')">${data.hero.scrollBtn} <span>↗</span></button>
+      </div>
+    </div>
+    <div class="hero-mod-marquee-bottom">
+      <div class="mod-marquee-inner reverse">${marqueeText}</div>
+    </div>
+  `;
+}
+
+function renderHeroProfessional(data) {
+  const hero = document.getElementById('hero');
+  hero.className = 'hero hero--professional';
+  hero.innerHTML = `
+    <div class="hero-pro-layout">
+      <div class="hero-pro-left">
+        <div class="hero-pro-meta">PROFILE.01 / ${new Date().getFullYear()}</div>
+        <h1 class="hero-pro-name">${data.hero.nameFirst} ${data.hero.nameLast}.</h1>
+        <div class="hero-pro-divider"></div>
+        <div class="hero-pro-tagline">
+          ${data.hero.tagline.join(' &mdash; ')}
+        </div>
+        <p class="hero-pro-statement">${data.hero.statement}</p>
+        <button class="hero-pro-btn" onclick="scrollToSection('brand')">${data.hero.scrollBtn}</button>
+      </div>
+      <div class="hero-pro-right">
+        <div class="hero-pro-img-wrap">
+          <img src="assets/portrait.png" alt="${data.hero.nameFirst}">
         </div>
       </div>
     </div>
-    <div class="hero-ed-marquee" aria-hidden="true">
-      <div class="hero-ed-marquee-inner">${marqueeText}</div>
+  `;
+}
+
+function renderHeroArtistic(data) {
+  const hero = document.getElementById('hero');
+  hero.className = 'hero hero--artistic';
+  hero.innerHTML = `
+    <div class="hero-art-canvas">
+      <div class="art-shape art-shape-1"></div>
+      <div class="art-shape art-shape-2"></div>
+      <div class="art-shape art-shape-3"></div>
+      <div class="hero-art-text-bg" aria-hidden="true">${data.hero.nameFirst}<br>${data.hero.nameLast}</div>
+    </div>
+    <div class="hero-art-foreground">
+      <div class="hero-art-portrait">
+        <div class="art-img-mask">
+          <img src="assets/portrait.png" alt="${data.hero.nameFirst}">
+        </div>
+        <div class="art-frame"></div>
+      </div>
+      <div class="hero-art-copy">
+        <h1 class="hero-art-name">${data.hero.nameFirst} <em>${data.hero.nameLast}</em></h1>
+        <p class="hero-art-statement">${data.hero.statement}</p>
+        <div class="hero-art-tagline">
+          ${data.hero.tagline.map(t => `<span>${t}</span>`).join(' <i>&amp;</i> ')}
+        </div>
+        <button class="hero-art-btn" onclick="scrollToSection('brand')"><span class="art-btn-txt">${data.hero.scrollBtn}</span><span class="art-btn-line"></span></button>
+      </div>
     </div>
   `;
 }
@@ -281,8 +380,13 @@ function renderContact(data) {
     // ── Render Hero Variant ──
     switch (heroVariant) {
       case 'cinematic': renderHeroCinematic(data); break;
-      case 'editorial': renderHeroEditorial(data); break;
-      default:          renderHeroOrbital(data);
+      case 'galaxy': renderHeroGalaxy(data); break;
+      case 'pookie': renderHeroPookie(data); break;
+      case 'modern': renderHeroModern(data); break;
+      case 'professional': renderHeroProfessional(data); break;
+      case 'artistic': renderHeroArtistic(data); break;
+      case 'orbital':
+      default: renderHeroOrbital(data); break;
     }
 
     // ── Global ──

@@ -20,12 +20,12 @@
 
     // Hero
     'hero-section':      { action: 'hide', selector: '#hero' },
-    'hero-name':         { action: 'hide', selector: '.hero-name, .hero-cin-name, .hero-ed-name-block' },
-    'hero-tagline':      { action: 'hide', selector: '.hero-tagline, .hero-cin-tagline-small, .hero-ed-marquee' },
-    'hero-statement':    { action: 'hide', selector: '.hero-statement, .hero-cin-statement, .hero-ed-statement' },
-    'hero-portrait':     { action: 'hide', selector: '.hero-portrait, .hero-cin-portrait-bg, .hero-ed-portrait-wrap' },
-    'hero-scroll-btn':   { action: 'hide', selector: '.hero-scroll, .hero-cin-btn, .hero-ed-scroll-hint' },
-    'hero-bg-blobs':     { action: 'hide', selector: '.hero-bg-element, .hero-cin-grain, .hero-cin-scanline, .hero-ed-bg-text', all: true },
+    'hero-name':         { action: 'hide', selector: '.hero-name, .hero-cin-name, .hero-gal-name, .hero-pook-name, .hero-mod-name, .hero-pro-name, .hero-art-name' },
+    'hero-tagline':      { action: 'hide', selector: '.hero-tagline, .hero-cin-tagline-small, .hero-gal-tagline, .hero-pook-tagline, .hero-mod-marquee-top, .hero-mod-marquee-bottom, .hero-pro-tagline, .hero-art-tagline' },
+    'hero-statement':    { action: 'hide', selector: '.hero-statement, .hero-cin-statement, .hero-gal-statement, .hero-pook-statement, .hero-mod-statement, .hero-pro-statement, .hero-art-statement' },
+    'hero-portrait':     { action: 'hide', selector: '.hero-portrait, .hero-cin-portrait-bg, .hero-gal-portrait-wrap, .hero-pook-portrait, .mod-cell-2, .hero-pro-img-wrap, .hero-art-portrait' },
+    'hero-scroll-btn':   { action: 'hide', selector: '.hero-scroll, .hero-cin-btn, .hero-gal-btn, .hero-pook-btn, .hero-mod-btn, .hero-pro-btn, .hero-art-btn' },
+    'hero-bg-blobs':     { action: 'hide', selector: '.hero-bg-element, .hero-cin-grain, .hero-cin-scanline, .hero-gal-bg, .hero-pook-bg, .hero-pro-meta, .hero-pro-divider, .hero-art-canvas', all: true },
 
     // Sections
     'section-brand':          { action: 'hide', selector: '#brand' },

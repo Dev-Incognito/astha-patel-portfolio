@@ -106,12 +106,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);height:
 .vc:hover{border-color:var(--bdh);}
 .vc.sel{border-color:var(--acc);box-shadow:0 0 20px var(--acc-d);}
 .vcp{height:80px;display:flex;align-items:flex-end;padding:10px;}
-.vco{background:linear-gradient(135deg,#faf6f2,#f0e4dc);}
-.vcci{background:linear-gradient(135deg,#070509,#2a0f1a);}
-.vce{background:linear-gradient(135deg,#f5f0eb,#ede4dc);}
+.vc-orb{background:linear-gradient(135deg,#faf6f2,#f0e4dc);}
+.vc-cin{background:linear-gradient(135deg,#070509,#2a0f1a);}
+.vc-gal{background:linear-gradient(135deg,#0b001a,#2a0845);}
+.vc-pook{background:linear-gradient(135deg,#ffe6f0,#ffd1df);}
+.vc-mod{background:linear-gradient(135deg,#ccff00,#000000);}
+.vc-pro{background:linear-gradient(135deg,#ffffff,#e2e8f0);}
+.vc-art{background:linear-gradient(135deg,#5f2c82,#49a09d);}
 .vcl{font-size:.55rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;}
-.vco .vcl,.vce .vcl{color:rgba(61,42,46,.5);}
-.vcci .vcl{color:rgba(255,255,255,.35);}
+.vc-orb .vcl,.vc-pro .vcl{color:rgba(0,0,0,.5);}
+.vc-cin .vcl,.vc-gal .vcl,.vc-art .vcl{color:rgba(255,255,255,.35);}
+.vc-pook .vcl{color:#ff6b9e;}
+.vc-mod .vcl{color:#ccff00;}
 .vci{padding:10px 12px;background:var(--surf2);}
 .vcn{font-size:.82rem;font-weight:600;}
 .vcd{font-size:.7rem;color:var(--tx2);margin-top:2px;}
@@ -326,7 +332,15 @@ function fontSel(ex, v) {
 
 function rHero(){
   const h=content.hero||{},v=flags['hero-variant']||'orbital';
-  const VS=[{id:'orbital',n:'Orbital',d:'Classic split layout',cl:'vco',l:'ORBITAL'},{id:'cinematic',n:'Cinematic',d:'Dark film aesthetic',cl:'vcci',l:'CINEMATIC'},{id:'editorial',n:'Editorial',d:'Magazine ghost-type',cl:'vce',l:'EDITORIAL'}];
+  const VS=[
+    {id:'cinematic',n:'Cinematic',d:'Dark film aesthetic',cl:'vc-cin',l:'CINEMATIC'},
+    {id:'orbital',n:'Orbital',d:'Classic split layout',cl:'vc-orb',l:'ORBITAL'},
+    {id:'galaxy',n:'Galaxy',d:'Deep space immersion',cl:'vc-gal',l:'GALAXY'},
+    {id:'pookie',n:'Pookie',d:'Soft cute pastels',cl:'vc-pook',l:'POOKIE'},
+    {id:'modern',n:'Modern',d:'Brutalist high contrast',cl:'vc-mod',l:'MODERN'},
+    {id:'professional',n:'Professional',d:'Corporate minimal',cl:'vc-pro',l:'PROFESSION'},
+    {id:'artistic',n:'Artistic',d:'Overengineered 3D',cl:'vc-art',l:'ARTISTIC'}
+  ];
   return hdr('Hero / Cover','First thing visitors see. Pick a variant and edit copy.')+
   '<div class="fg">'+
   fld('Section Font',fontSel('content.hero.font',h.font))+
