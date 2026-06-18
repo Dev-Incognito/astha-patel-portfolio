@@ -61,6 +61,9 @@
 
 /* GALAXY THEME */
 body.theme-galaxy {
+  --blush-pink: #0088cc;
+  --rose-quartz: #00f2fe;
+  --soft-mauve: #4facfe;
   --warm-ivory: #05000a;
   --cream: #080014;
   --petal: #0c001f;
@@ -73,7 +76,7 @@ body.theme-galaxy {
   --off-white: #0f0026;
   --light-gray: #140033;
   --medium-gray: #1f004c;
-  --dark-gray: #ffffff;
+  --dark-gray: #b3ccff;
   --font-display: 'Orbitron', sans-serif;
   --font-heading: 'Orbitron', sans-serif;
   --font-body: 'Space Grotesk', sans-serif;
@@ -84,17 +87,22 @@ body.theme-galaxy * { border-color: rgba(0, 242, 254, 0.2) !important; }
 
 /* POOKIE THEME */
 body.theme-pookie {
+  --blush-pink: #ffb6c1;
+  --rose-quartz: #ff69b4;
+  --soft-mauve: #db7093;
   --warm-ivory: #fff0f5;
   --cream: #ffe4e1;
-  --petal: #ffb6c1;
-  --charcoal: #ff69b4;
-  --graphite: #db7093;
+  --petal: #ffd1dc;
+  --charcoal: #b03060;
+  --graphite: #c71585;
   --rose-gold: #ff1493;
   --rose-gold-light: #ffb6c1;
   --rose-gold-dark: #c71585;
-  --white: rgba(255,255,255,0.8);
+  --white: #ffffff;
   --off-white: rgba(255,255,255,0.6);
   --light-gray: #ffe4e1;
+  --medium-gray: #ffb6c1;
+  --dark-gray: #db7093;
   --font-display: 'Fredoka One', cursive;
   --font-heading: 'Fredoka One', cursive;
   --font-body: 'Outfit', sans-serif;
@@ -107,6 +115,9 @@ body.theme-pookie .contact-card { border-radius: 40px !important; }
 
 /* MODERN GEN Z THEME */
 body.theme-modern {
+  --blush-pink: #ccff00;
+  --rose-quartz: #aacc00;
+  --soft-mauve: #88aa00;
   --warm-ivory: #000000;
   --cream: #000000;
   --petal: #111111;
@@ -114,10 +125,12 @@ body.theme-modern {
   --graphite: #ffffff;
   --rose-gold: #ccff00;
   --rose-gold-light: #ffffff;
-  --rose-gold-dark: #ccff00;
+  --rose-gold-dark: #aacc00;
   --white: #000000;
   --off-white: #111111;
-  --light-gray: #000000;
+  --light-gray: #222222;
+  --medium-gray: #444444;
+  --dark-gray: #ffffff;
   --font-display: 'Space Grotesk', sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Space Grotesk', sans-serif;
@@ -130,6 +143,9 @@ body.theme-modern .card, body.theme-modern .contact-card { border: 2px solid #cc
 
 /* PROFESSIONAL THEME */
 body.theme-professional {
+  --blush-pink: #e2e8f0;
+  --rose-quartz: #cbd5e1;
+  --soft-mauve: #94a3b8;
   --warm-ivory: #ffffff;
   --cream: #f8fafc;
   --petal: #f1f5f9;
@@ -140,6 +156,9 @@ body.theme-professional {
   --rose-gold-dark: #000000;
   --white: #ffffff;
   --off-white: #f8fafc;
+  --light-gray: #e2e8f0;
+  --medium-gray: #cbd5e1;
+  --dark-gray: #64748b;
   --font-display: 'Inter', sans-serif;
   --font-heading: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -149,11 +168,14 @@ body.theme-professional .card { border: 1px solid #e2e8f0; }
 
 /* ARTISTIC THEME */
 body.theme-artistic {
+  --blush-pink: #b82a41;
+  --rose-quartz: #e94560;
+  --soft-mauve: #ff768b;
   --warm-ivory: #1a1a2e;
   --cream: #16213e;
   --petal: #0f3460;
-  --charcoal: #eaeaea;
-  --graphite: #a0a0a0;
+  --charcoal: #ffffff;
+  --graphite: #eaeaea;
   --rose-gold: #e94560;
   --rose-gold-light: #ff768b;
   --rose-gold-dark: #b82a41;
@@ -186,16 +208,22 @@ body.theme-pookie::after {
 
 /* CINEMATIC THEME */
 body.theme-cinematic {
+  --blush-pink: #ff4d4d;
+  --rose-quartz: #b22222;
+  --soft-mauve: #800000;
   --warm-ivory: #070509;
   --cream: #0a080d;
   --petal: #120e17;
-  --charcoal: #e5e5e5;
-  --graphite: #a3a3a3;
+  --charcoal: #ffffff;
+  --graphite: #e5e5e5;
   --rose-gold: #b22222;
   --rose-gold-light: #ff4d4d;
   --rose-gold-dark: #800000;
   --white: #000000;
   --off-white: #0a0a0a;
+  --light-gray: #120e17;
+  --medium-gray: #1f1f1f;
+  --dark-gray: #e5e5e5;
   --font-display: 'Bebas Neue', sans-serif;
   --font-heading: 'Bebas Neue', sans-serif;
 }
@@ -921,7 +949,7 @@ a {
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--white);
+  color: #ffffff;
   letter-spacing: 0.02em;
 }
 
@@ -1521,7 +1549,7 @@ a {
   height: 44px;
   border-radius: 50%;
   background: var(--rose-gold);
-  color: var(--white);
+  color: #ffffff;
   border: none;
   cursor: pointer;
   display: flex;
