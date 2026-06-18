@@ -302,11 +302,19 @@ function ta(ex,v){return '<textarea class="fta" oninput="'+ex+'=this.value;dsv()
 function hdr(t,d){return '<div class="shd"><h2>'+t+'</h2><p>'+d+'</p></div>';}
 function sh(t){return '<div class="subhdr">'+t+'</div>';}
 
+const FONTS = ['Default', 'Inter', 'Roboto', 'Open Sans', 'Montserrat', 'Lato', 'Poppins', 'Oswald', 'Roboto Mono', 'Raleway', 'Playfair Display', 'Merriweather', 'Nunito', 'Ubuntu', 'Rubik', 'Lora', 'Work Sans', 'Fira Sans', 'Quicksand', 'Barlow', 'Mulish', 'Inconsolata', 'PT Sans', 'Titillium Web', 'DM Sans', 'IBM Plex Sans', 'Josefin Sans', 'Cabin', 'Libre Franklin', 'Dancing Script', 'Anton', 'Bebas Neue', 'Mukta', 'Karla', 'Teko', 'Fjalla One', 'Dosis', 'Bitter', 'Arimo', 'Varela Round', 'Pacifico', 'Hind', 'Zilla Slab', 'Righteous', 'Cinzel', 'Archivo Black', 'Lobster', 'EB Garamond', 'Caveat', 'Comfortaa'];
+function fontSel(ex, v) {
+  const opts = FONTS.map(f => '<option value="'+(f==='Default'?'':f)+'"'+(v===f?' selected':'')+'>'+f+'</option>').join('');
+  return '<select class="fsel" onchange="'+ex+'=this.value;dsv();">'+opts+'</select>';
+}
+
+
 function rHero(){
   const h=content.hero||{},v=flags['hero-variant']||'orbital';
   const VS=[{id:'orbital',n:'Orbital',d:'Classic split layout',cl:'vco',l:'ORBITAL'},{id:'cinematic',n:'Cinematic',d:'Dark film aesthetic',cl:'vcci',l:'CINEMATIC'},{id:'editorial',n:'Editorial',d:'Magazine ghost-type',cl:'vce',l:'EDITORIAL'}];
   return hdr('Hero / Cover','First thing visitors see. Pick a variant and edit copy.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.hero.font',h.font))+
   fld('First Name',inp('content.hero.nameFirst',h.nameFirst||''))+
   fld('Last Name',inp('content.hero.nameLast',h.nameLast||''))+
   fld('Statement',ta('content.hero.statement',h.statement||''),true)+
@@ -326,6 +334,7 @@ function rBrand(){
   const b=content.brand||{};
   return hdr('Personal Brand','"Who I Am" section.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.brand.font',b.font))+
   fld('Section Label',inp('content.brand.sectionLabel',b.sectionLabel||''))+
   fld('Section Title',inp('content.brand.sectionTitle',b.sectionTitle||''))+
   fld('Subtitle',ta('content.brand.sectionSubtitle',b.sectionSubtitle||''),true)+
@@ -349,6 +358,7 @@ function rStr(){
   const s=content.strengths||{};
   return hdr('Core Strengths','Skills timeline.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.strengths.font',s.font))+
   fld('Section Label',inp('content.strengths.sectionLabel',s.sectionLabel||''))+
   fld('Section Title',inp('content.strengths.sectionTitle',s.sectionTitle||''))+
   fld('Subtitle',ta('content.strengths.sectionSubtitle',s.sectionSubtitle||''),true)+
@@ -375,6 +385,7 @@ function rDiff(){
   const d=content.differentiators||{};
   return hdr('Differentiators','"What Sets Me Apart" - numbered cards.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.differentiators.font',d.font))+
   fld('Section Label',inp('content.differentiators.sectionLabel',d.sectionLabel||''))+
   fld('Section Title',inp('content.differentiators.sectionTitle',d.sectionTitle||''))+
   fld('Subtitle',ta('content.differentiators.sectionSubtitle',d.sectionSubtitle||''),true)+
@@ -395,6 +406,7 @@ function rExp(){
   const e=content.exposure||{};
   return hdr('Business Exposure','"Learning Business From the Inside".')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.exposure.font',e.font))+
   fld('Section Label',inp('content.exposure.sectionLabel',e.sectionLabel||''))+
   fld('Section Title',inp('content.exposure.sectionTitle',e.sectionTitle||''))+
   fld('Subtitle',ta('content.exposure.sectionSubtitle',e.sectionSubtitle||''),true)+
@@ -417,6 +429,7 @@ function rCap(){
   const c=content.capabilities||{};
   return hdr('Capabilities','"What I Bring With Me" - progress bars.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.capabilities.font',c.font))+
   fld('Section Label',inp('content.capabilities.sectionLabel',c.sectionLabel||''))+
   fld('Section Title',inp('content.capabilities.sectionTitle',c.sectionTitle||''))+
   fld('Subtitle',ta('content.capabilities.sectionSubtitle',c.sectionSubtitle||''),true)+
@@ -437,6 +450,7 @@ function rVis(){
   const v=content.vision||{};
   return hdr('Career Vision','"Where I Am Heading" - pillars.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.vision.font',v.font))+
   fld('Section Label',inp('content.vision.sectionLabel',v.sectionLabel||''))+
   fld('Section Title',inp('content.vision.sectionTitle',v.sectionTitle||''))+
   fld('Vision Statement',ta('content.vision.statement',v.statement||''),true)+
@@ -458,6 +472,7 @@ function rIntro(){
   const n=content.introduction||{};
   return hdr('Personal Introduction','"In My Own Words" - the personal letter.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.introduction.font',n.font))+
   fld('Section Label',inp('content.introduction.sectionLabel',n.sectionLabel||''))+
   fld('Section Title',inp('content.introduction.sectionTitle',n.sectionTitle||''))+
   fld('Signature Name',inp('content.introduction.signature',n.signature||''),true)+
@@ -474,6 +489,7 @@ function rCon(){
   const c=content.contact||{};
   return hdr('Contact','Final section - details, social links, QR codes.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.contact.font',c.font))+
   fld('Section Label',inp('content.contact.sectionLabel',c.sectionLabel||''))+
   fld('Section Title',inp('content.contact.sectionTitle',c.sectionTitle||''))+
   fld('Card Name',inp('content.contact.cardName',c.cardName||''))+
@@ -509,6 +525,7 @@ function rGlob(){
   const g=content.global||{};
   return hdr('Global Settings','Navigation and footer text.')+
   '<div class="fg">'+
+  fld('Section Font',fontSel('content.global.font',g.font))+
   fld('Nav Brand Name',inp('content.global.navBrand',g.navBrand||''))+
   fld('Footer Brand',inp('content.global.footerBrand',g.footerBrand||''))+
   fld('Footer Tagline',inp('content.global.footerText',g.footerText||''),true)+

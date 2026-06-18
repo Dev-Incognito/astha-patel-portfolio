@@ -251,6 +251,31 @@ function renderContact(data) {
       if (storedFlags) Object.assign(flags, JSON.parse(storedFlags));
     } catch(e) {}
 
+    
+    // ── Apply Section Fonts ──
+    const sections = ['hero', 'brand', 'strengths', 'differentiators', 'exposure', 'capabilities', 'vision', 'introduction', 'contact'];
+    const fontSet = new Set();
+    
+    sections.forEach(sec => {
+      if (data[sec] && data[sec].font) {
+        fontSet.add(data[sec].font);
+        const el = document.getElementById(sec);
+        if (el) {
+          el.style.setProperty('--font-display', `"${data[sec].font}", sans-serif`);
+          el.style.setProperty('--font-heading', `"${data[sec].font}", sans-serif`);
+          el.style.setProperty('--font-body', `"${data[sec].font}", sans-serif`);
+        }
+      }
+    });
+
+    if (fontSet.size > 0) {
+      const families = Array.from(fontSet).map(f => `family=${f.replace(/ /g, '+')}:wght@300;400;500;600;700`).join('&');
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `https://fonts.googleapis.com/css2?${families}&display=swap`;
+      document.head.appendChild(link);
+    }
+
     const heroVariant = flags['hero-variant'] || 'orbital';
 
     // ── Render Hero Variant ──
