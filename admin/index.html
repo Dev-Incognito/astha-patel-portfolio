@@ -149,6 +149,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);height:
 @keyframes spin{to{transform:rotate(360deg)}}
 .pst.act .psi{border-color:var(--acc);animation:spin 1s linear infinite;}
 .subhdr{font-size:.78rem;font-weight:600;color:var(--tx2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;}
+@media (max-width:768px){
+  .tb{flex-wrap:wrap;height:auto;padding:12px 20px;gap:10px;}
+  .tb-sec{width:100%;order:3;margin-top:4px;}
+  .dbbody{flex-direction:column;}
+  .sb{width:100%;flex-direction:row;border-right:none;border-bottom:1px solid var(--bd);padding:8px;height:auto;overflow-x:auto;}
+  .sbg{display:flex;gap:8px;padding:0;border:none !important;margin-right:12px;align-items:center;}
+  .sgl{display:none;}
+  .nb{white-space:nowrap;width:auto;padding:6px 12px;}
+  .main{padding:20px;}
+  .fg,.vcg{grid-template-columns:1fr;}
+  .modal{width:calc(100% - 40px);margin:20px;padding:24px;}
+  .tarow{flex-direction:column;}
+  #lcard{width:90%;padding:30px 20px;}
+  .lbrand{text-align:center;}
+}
 </style>
 </head>
 <body>
