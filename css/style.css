@@ -1613,7 +1613,7 @@ a {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(194,114,126,0.4), transparent);
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
   z-index: 2;
   animation: scanline 8s linear infinite;
 }

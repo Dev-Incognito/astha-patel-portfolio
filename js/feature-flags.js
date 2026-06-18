@@ -19,12 +19,12 @@
 
     // Hero
     'hero-section':      { action: 'hide', selector: '#hero' },
-    'hero-name':         { action: 'hide', selector: '.hero-name' },
-    'hero-tagline':      { action: 'hide', selector: '.hero-tagline' },
-    'hero-statement':    { action: 'hide', selector: '.hero-statement' },
-    'hero-portrait':     { action: 'hide', selector: '.hero-portrait' },
-    'hero-scroll-btn':   { action: 'hide', selector: '.hero-scroll' },
-    'hero-bg-blobs':     { action: 'hide', selector: '.hero-bg-element', all: true },
+    'hero-name':         { action: 'hide', selector: '.hero-name, .hero-cin-name, .hero-ed-name-block' },
+    'hero-tagline':      { action: 'hide', selector: '.hero-tagline, .hero-cin-tagline-small, .hero-ed-marquee' },
+    'hero-statement':    { action: 'hide', selector: '.hero-statement, .hero-cin-statement, .hero-ed-statement' },
+    'hero-portrait':     { action: 'hide', selector: '.hero-portrait, .hero-cin-portrait-bg, .hero-ed-portrait-wrap' },
+    'hero-scroll-btn':   { action: 'hide', selector: '.hero-scroll, .hero-cin-btn, .hero-ed-scroll-hint' },
+    'hero-bg-blobs':     { action: 'hide', selector: '.hero-bg-element, .hero-cin-grain, .hero-cin-scanline, .hero-ed-bg-text', all: true },
 
     // Sections
     'section-brand':          { action: 'hide', selector: '#brand' },
