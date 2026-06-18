@@ -1,9 +1,10 @@
 /* ============================================
    CONTENT LOADER
-   Fetches content.json and populates the DOM
+   Fetches content.json and populates the DOM,
+   then kicks off animations.
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', async () => {
+(async function() {
   try {
     const response = await fetch('data/content.json');
     if (!response.ok) throw new Error('Failed to load content.json');
@@ -15,21 +16,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.footer-text').textContent = data.global.footerText;
 
     const navLinksList = document.getElementById('navLinks');
-    navLinksList.innerHTML = data.global.navLinks.map(link => 
+    navLinksList.innerHTML = data.global.navLinks.map(link =>
       `<li><a href="#${link.id}">${link.label}</a></li>`
     ).join('');
 
-    const mobileNavList = document.getElementById('mobileNav');
-    mobileNavList.innerHTML = data.global.navLinks.map(link => 
+    const mobileNavEl = document.getElementById('mobileNav');
+    mobileNavEl.innerHTML = data.global.navLinks.map(link =>
       `<a href="#${link.id}" onclick="closeMobileNav()">${link.label}</a>`
     ).join('');
 
     // -- HERO --
     const heroName = document.querySelector('.hero-name');
     heroName.innerHTML = `${data.hero.nameFirst}<span>${data.hero.nameLast}</span>`;
-    
+
     const heroTagline = document.querySelector('.hero-tagline');
-    heroTagline.innerHTML = data.hero.tagline.map((tag, i, arr) => 
+    heroTagline.innerHTML = data.hero.tagline.map((tag, i, arr) =>
       `<span>${tag}</span>${i < arr.length - 1 ? '<span class="dot"></span>' : ''}`
     ).join('');
 
@@ -44,26 +45,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const brandValues = document.querySelector('.brand-values');
     brandValues.innerHTML = data.brand.values.map((v, i) => `
-      <div class="value-card reveal reveal-delay-${i+1}">
+      <div class="value-card reveal reveal-delay-${i + 1}">
         <div class="value-icon">${v.icon}</div>
         <h3>${v.title}</h3>
         <p>${v.desc}</p>
       </div>
     `).join('');
 
-    const philosophySection = document.querySelector('#brand .reveal.reveal-delay-1:last-child');
-    philosophySection.innerHTML = `
-      <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 500; margin-bottom: 16px; color: var(--charcoal);">${data.brand.philosophyTitle}</h3>
-      <p style="font-family: var(--font-display); font-size: 1.05rem; line-height: 1.9; color: var(--graphite); font-style: italic;">
-        ${data.brand.philosophyText}
-      </p>
-    `;
+    // Philosophy block - target by data attribute to be safe
+    const philosophyBlock = document.querySelector('#brand [data-block="philosophy"]');
+    if (philosophyBlock) {
+      philosophyBlock.innerHTML = `
+        <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 500; margin-bottom: 16px; color: var(--charcoal);">${data.brand.philosophyTitle}</h3>
+        <p style="font-family: var(--font-display); font-size: 1.05rem; line-height: 1.9; color: var(--graphite); font-style: italic;">
+          ${data.brand.philosophyText}
+        </p>
+      `;
+    }
 
     // -- STRENGTHS --
     document.querySelector('#strengths .section-label').textContent = data.strengths.sectionLabel;
     document.querySelector('#strengths .section-title').textContent = data.strengths.sectionTitle;
     document.querySelector('#strengths .section-subtitle').textContent = data.strengths.sectionSubtitle;
-    
+
     const expTimeline = document.querySelector('.exp-timeline');
     expTimeline.innerHTML = data.strengths.timeline.map((item, i) => `
       <div class="exp-item reveal ${i > 0 ? 'reveal-delay-' + i : ''}">
@@ -95,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('#exposure .section-label').textContent = data.exposure.sectionLabel;
     document.querySelector('#exposure .section-title').textContent = data.exposure.sectionTitle;
     document.querySelector('#exposure .section-subtitle').textContent = data.exposure.sectionSubtitle;
-    
+
     document.querySelector('.biz-narrative').innerHTML = `
       <p>${data.exposure.narrativeP1}</p>
       <p>${data.exposure.narrativeP2}</p>
@@ -103,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
 
     document.querySelector('.biz-highlights').innerHTML = data.exposure.highlights.map((h, i) => `
-      <div class="biz-highlight reveal reveal-delay-${i+1}">
+      <div class="biz-highlight reveal reveal-delay-${i + 1}">
         <h4>${h.title}</h4>
         <p>${h.desc}</p>
       </div>
@@ -117,12 +121,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const capVisual = document.querySelector('.cap-visual');
     let capHtml = '';
     for (let i = 0; i < data.capabilities.items.length; i += 3) {
-      capHtml += `<div class="cap-row reveal ${i > 0 ? 'reveal-delay-' + (i/3) : ''}">`;
+      capHtml += `<div class="cap-row reveal ${i > 0 ? 'reveal-delay-' + (i / 3) : ''}">`;
       for (let j = 0; j < 3 && i + j < data.capabilities.items.length; j++) {
-        const item = data.capabilities.items[i+j];
+        const item = data.capabilities.items[i + j];
         capHtml += `
           <div class="cap-item">
-            <span class="cap-emoji"></span>
             <h3>${item.title}</h3>
             <div class="cap-bar-container">
               <div class="cap-bar" style="width: ${item.progress}"></div>
@@ -141,26 +144,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelector('.vision-statement').innerHTML = data.vision.statement;
 
     document.querySelector('.vision-pillars').innerHTML = data.vision.pillars.map((p, i) => `
-      <div class="vision-pillar reveal reveal-delay-${i+1}">
+      <div class="vision-pillar reveal reveal-delay-${i + 1}">
         <div class="vision-pillar-icon">${p.icon}</div>
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
       </div>
     `).join('');
 
-    document.querySelector('#vision .reveal.reveal-delay-1 p').textContent = data.vision.closingQuote;
+    const visionQuoteEl = document.querySelector('#vision [data-block="closing-quote"] p');
+    if (visionQuoteEl) visionQuoteEl.textContent = data.vision.closingQuote;
 
     // -- INTRODUCTION --
     document.querySelector('#introduction .section-label').textContent = data.introduction.sectionLabel;
     document.querySelector('#introduction .section-title').textContent = data.introduction.sectionTitle;
-    
+
     document.querySelector('.intro-text').innerHTML = data.introduction.paragraphs.map(p => `<p>${p}</p>`).join('');
     document.querySelector('.intro-signature .name').textContent = data.introduction.signature;
 
     // -- CONTACT --
     document.querySelector('#contact .section-label').textContent = data.contact.sectionLabel;
     document.querySelector('#contact .section-title').textContent = data.contact.sectionTitle;
-    
+
     document.querySelector('.contact-name').textContent = data.contact.cardName;
     document.querySelector('.contact-tagline').textContent = data.contact.cardTagline;
 
@@ -172,15 +176,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     `).join('');
 
     document.querySelector('.contact-footer').textContent = data.contact.footer;
-    document.querySelector('#contact .reveal.reveal-delay-3 p').textContent = data.contact.references;
 
-    // Re-initialize animations for dynamic content
-    if (window.initializeAnimations) {
-       window.initializeAnimations();
-    }
+    const referencesEl = document.querySelector('#contact [data-block="references"] p');
+    if (referencesEl) referencesEl.textContent = data.contact.references;
 
-    console.log('✦ Content loaded from JSON');
+    console.log('✦ Content loaded from content.json');
   } catch (error) {
-    console.error('Error loading content:', error);
+    console.error('Content loader error:', error);
   }
-});
+
+  // Initialize animations after content injection
+  // Uses requestAnimationFrame to ensure DOM has painted
+  requestAnimationFrame(() => {
+    if (typeof window.initializeAnimations === 'function') {
+      window.initializeAnimations();
+    }
+  });
+})();

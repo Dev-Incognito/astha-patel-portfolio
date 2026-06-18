@@ -39,7 +39,7 @@
     // Brand elements
     'brand-quote':       { action: 'hide', selector: '.brand-quote' },
     'brand-values':      { action: 'hide', selector: '.brand-values' },
-    'brand-philosophy':  { action: 'hide', selector: '#brand .reveal.reveal-delay-1:last-child', parent: '#brand' },
+    'brand-philosophy':  { action: 'hide', selector: '#brand [data-block="philosophy"]' },
 
     // Strengths elements
     'strengths-timeline':{ action: 'class-toggle', target: '.exp-timeline', className: 'no-timeline-line' },
@@ -51,12 +51,12 @@
 
     // Vision elements
     'vision-pillars':       { action: 'hide', selector: '.vision-pillars' },
-    'vision-closing-quote': { action: 'hide-nth', selector: '#vision', childIndex: 'last-quote' },
+    'vision-closing-quote': { action: 'hide', selector: '#vision [data-block="closing-quote"]' },
 
     // Contact elements
     'contact-portrait':    { action: 'hide', selector: '.contact-portrait' },
     'contact-info':        { action: 'hide', selector: '.contact-info' },
-    'contact-references':  { action: 'hide-parent', selector: '#contact > .section-inner > div:last-child' },
+    'contact-references':  { action: 'hide', selector: '#contact [data-block="references"]' },
 
     // Visual effects (these use JS-level flags, read by script.js)
     'magnetic-hover':   { action: 'js-flag' },
@@ -118,29 +118,6 @@
         if (el) el.style.display = isEnabled ? '' : 'none';
       }
     }
-    else if (mapping.action === 'hide-parent') {
-      const el = document.querySelector(mapping.selector);
-      if (el) el.style.display = isEnabled ? '' : 'none';
-    }
-    else if (mapping.action === 'hide-nth') {
-      // Special: vision closing quote (divider + quote div)
-      const section = document.querySelector(mapping.selector);
-      if (section) {
-        const inner = section.querySelector('.section-inner');
-        if (inner) {
-          const children = inner.children;
-          // Last two children are the divider wrapper and quote wrapper
-          for (let i = Math.max(0, children.length - 2); i < children.length; i++) {
-            if (!children[i].classList.contains('vision-pillars') &&
-                !children[i].classList.contains('section-label') &&
-                !children[i].classList.contains('section-title') &&
-                !children[i].classList.contains('vision-statement')) {
-              children[i].style.display = isEnabled ? '' : 'none';
-            }
-          }
-        }
-      }
-    }
     else if (mapping.action === 'class-toggle') {
       const target = mapping.target === 'body'
         ? document.body
@@ -154,24 +131,11 @@
       }
     }
     else if (mapping.action === 'js-flag') {
-      // Store on window for script.js to read
       window.__featureFlags = window.__featureFlags || {};
       window.__featureFlags[flagName] = isEnabled;
     }
-
-    // Special: brand-philosophy targets the last child div inside #brand .section-inner
-    if (flagName === 'brand-philosophy') {
-      const brand = document.querySelector('#brand .section-inner');
-      if (brand) {
-        // Philosophy is the div after the divider (last 2 children)
-        const children = Array.from(brand.children);
-        const lastTwo = children.slice(-2);
-        lastTwo.forEach(el => {
-          el.style.display = isEnabled ? '' : 'none';
-        });
-      }
-    }
   }
+
 
   // Apply all flags
   function applyAllFlags() {
