@@ -136,7 +136,7 @@ function renderHeroGalaxy(data) {
         <img src="assets/portrait.png" alt="${data.hero.nameFirst}" fetchpriority="high">
       </div>
       <div class="hero-gal-text">
-        <h1 class="hero-gal-name">${data.hero.nameFirst} <span>${data.hero.nameLast}</span></h1>
+        <h1 class="hero-gal-name"><span class="baffle-target">${data.hero.nameFirst}</span> <span class="baffle-target stroke-text">${data.hero.nameLast}</span></h1>
         <div class="hero-gal-tagline">
           ${data.hero.tagline.map(t => `<span class="gal-tag">${t}</span>`).join('<span class="gal-sep">✦</span>')}
         </div>
@@ -187,7 +187,7 @@ function renderHeroModern(data) {
     </div>
     <div class="hero-mod-grid">
       <div class="mod-cell mod-cell-1">
-        <h1 class="hero-mod-name">${data.hero.nameFirst}<br>${data.hero.nameLast}</h1>
+        <h1 class="hero-mod-name"><span class="baffle-target">${data.hero.nameFirst}</span><br><span class="baffle-target">${data.hero.nameLast}</span></h1>
       </div>
       <div class="mod-cell mod-cell-2">
         <img src="assets/portrait.png" alt="${data.hero.nameFirst}">

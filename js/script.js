@@ -98,7 +98,9 @@ window.initializeAnimations = function() {
       
     } else if ((theme === 'theme-modern' || theme === 'theme-galaxy') && typeof baffle !== 'undefined') {
       // Baffle.js Glitch
-      const b = baffle(heroNameEl, {
+      let targets = heroNameEl.querySelectorAll('.baffle-target');
+      if (targets.length === 0) targets = heroNameEl;
+      const b = baffle(targets, {
         characters: '█▓▒░/|\\-<>+*^[]{}',
         speed: 75
       }).start();
