@@ -353,7 +353,7 @@ function rHero(){
   '<div class="tgl">'+
   (h.tagline||[]).map((t,i)=>'<div class="tgi"><input value="'+esc(t)+'" style="width:'+(Math.max(t.length,4)+1)+'ch" oninput="content.hero.tagline['+i+']=this.value;this.style.width=(Math.max(this.value.length,4)+1)+\'ch\';dsv();"><button class="tgr" onclick="content.hero.tagline.splice('+i+',1);sv();show(\'hero\');">&#215;</button></div>').join('')+
   '</div><div class="tarow"><input type="text" class="fi" id="ntag" placeholder="New word" style="max-width:180px;"><button class="btn bsec" onclick="atag()">+ Add</button></div></div>'+
-  '<hr class="divr">'+sh('Hero Layout Variant')+
+  '<hr class="divr"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">'+sh('Website Theme Variant')+'<a href="../" target="_blank" class="btn bacc" style="text-decoration:none;">Preview Theme ↗</a></div>'+
   '<div class="vcg">'+VS.map(vr=>'<div class="vc'+(v===vr.id?' sel':'')+'" onclick="setV(\''+vr.id+'\')"><div class="vcp '+vr.cl+'"><div class="vcl">'+vr.l+'</div></div><div class="vci"><div class="vcn">'+vr.n+'</div><div class="vcd">'+vr.d+'</div></div></div>').join('')+'</div>';
 }
 function atag(){const v=document.getElementById('ntag').value.trim();if(!v)return;if(!content.hero.tagline)content.hero.tagline=[];content.hero.tagline.push(v);sv();show('hero');}

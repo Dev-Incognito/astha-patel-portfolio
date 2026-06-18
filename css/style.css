@@ -4,7 +4,7 @@
    ============================================ */
 
 /* ---------- Google Fonts ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Outfit:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Orbitron:wght@400;500;700;900&family=Fredoka+One&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap');
 
 /* ---------- CSS Custom Properties ---------- */
 :root {
@@ -52,6 +52,131 @@
   --shadow-medium: 0 8px 40px rgba(183, 110, 121, 0.12);
   --shadow-large: 0 20px 60px rgba(183, 110, 121, 0.15);
   --shadow-glow: 0 0 40px rgba(183, 110, 121, 0.2);
+}
+
+/* ================================================================
+   GLOBAL BRUTALIST THEME OVERRIDES
+   Redefining root variables transforms the ENTIRE site automatically!
+   ================================================================ */
+
+/* GALAXY THEME */
+body.theme-galaxy {
+  --warm-ivory: #05000a;
+  --cream: #080014;
+  --petal: #0c001f;
+  --charcoal: #ffffff;
+  --graphite: #b3ccff;
+  --rose-gold: #00f2fe;
+  --rose-gold-light: #4facfe;
+  --rose-gold-dark: #0088cc;
+  --white: #0a001a;
+  --off-white: #0f0026;
+  --light-gray: #140033;
+  --medium-gray: #1f004c;
+  --dark-gray: #ffffff;
+  --font-display: 'Orbitron', sans-serif;
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --shadow-medium: 0 0 20px rgba(0, 242, 254, 0.2);
+  --shadow-large: 0 0 40px rgba(0, 242, 254, 0.4);
+}
+body.theme-galaxy * { border-color: rgba(0, 242, 254, 0.2) !important; }
+
+/* POOKIE THEME */
+body.theme-pookie {
+  --warm-ivory: #fff0f5;
+  --cream: #ffe4e1;
+  --petal: #ffb6c1;
+  --charcoal: #ff69b4;
+  --graphite: #db7093;
+  --rose-gold: #ff1493;
+  --rose-gold-light: #ffb6c1;
+  --rose-gold-dark: #c71585;
+  --white: rgba(255,255,255,0.8);
+  --off-white: rgba(255,255,255,0.6);
+  --light-gray: #ffe4e1;
+  --font-display: 'Fredoka One', cursive;
+  --font-heading: 'Fredoka One', cursive;
+  --font-body: 'Outfit', sans-serif;
+  --shadow-medium: 0 10px 30px rgba(255,105,180,0.15);
+  --shadow-large: 0 20px 50px rgba(255,105,180,0.25);
+}
+body.theme-pookie * { border-radius: 40px !important; }
+body.theme-pookie .hero-pook-portrait img { border-radius: 50% !important; }
+body.theme-pookie .contact-card { border-radius: 40px !important; }
+
+/* MODERN GEN Z THEME */
+body.theme-modern {
+  --warm-ivory: #000000;
+  --cream: #000000;
+  --petal: #111111;
+  --charcoal: #ccff00;
+  --graphite: #ffffff;
+  --rose-gold: #ccff00;
+  --rose-gold-light: #ffffff;
+  --rose-gold-dark: #ccff00;
+  --white: #000000;
+  --off-white: #111111;
+  --light-gray: #000000;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --shadow-subtle: 8px 8px 0 #ccff00;
+  --shadow-medium: 12px 12px 0 #ccff00;
+  --shadow-large: 16px 16px 0 #ccff00;
+}
+body.theme-modern * { border-radius: 0 !important; }
+body.theme-modern .card, body.theme-modern .contact-card { border: 2px solid #ccff00 !important; }
+
+/* PROFESSIONAL THEME */
+body.theme-professional {
+  --warm-ivory: #ffffff;
+  --cream: #f8fafc;
+  --petal: #f1f5f9;
+  --charcoal: #0f172a;
+  --graphite: #334155;
+  --rose-gold: #0f172a;
+  --rose-gold-light: #475569;
+  --rose-gold-dark: #000000;
+  --white: #ffffff;
+  --off-white: #f8fafc;
+  --font-display: 'Inter', sans-serif;
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+body.theme-professional * { box-shadow: none !important; }
+body.theme-professional .card { border: 1px solid #e2e8f0; }
+
+/* ARTISTIC THEME */
+body.theme-artistic {
+  --warm-ivory: #EAE6DF;
+  --cream: #E2DDD5;
+  --petal: #D4CE C4;
+  --charcoal: #2C363F;
+  --graphite: #5b6770;
+  --rose-gold: #C2727E;
+  --rose-gold-light: #7C98B3;
+  --rose-gold-dark: #E0A96D;
+  --font-display: 'Playfair Display', serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Cormorant Garamond', serif;
+}
+body.theme-artistic .card { mix-blend-mode: multiply; background: transparent; border: 1px solid #2C363F; }
+
+/* CINEMATIC THEME */
+body.theme-cinematic {
+  --warm-ivory: #070509;
+  --cream: #0a080d;
+  --petal: #120e17;
+  --charcoal: #e5e5e5;
+  --graphite: #a3a3a3;
+  --rose-gold: #b22222;
+  --rose-gold-light: #ff4d4d;
+  --rose-gold-dark: #800000;
+  --white: #000000;
+  --off-white: #0a0a0a;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-heading: 'Bebas Neue', sans-serif;
 }
 
 /* ---------- Reset & Base ---------- */

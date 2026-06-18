@@ -376,6 +376,7 @@ function renderContact(data) {
     }
 
     const heroVariant = flags['hero-variant'] || 'orbital';
+    document.body.className = 'theme-' + heroVariant;
 
     // ── Render Hero Variant ──
     switch (heroVariant) {
