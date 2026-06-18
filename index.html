@@ -18,8 +18,27 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#10022;</text></svg>">
 </head>
 <body>
+  <script>
+    (function() {
+      var theme = sessionStorage.getItem('preview-theme');
+      var flagsStr = sessionStorage.getItem('preview-flags');
+      var showGift = true;
+      if (flagsStr) {
+        try {
+          var flags = JSON.parse(flagsStr);
+          if (flags['hero-variant'] && !theme) theme = flags['hero-variant'];
+          if (flags['gift-wrap'] === false) showGift = false;
+        } catch(e) {}
+      }
+      document.body.className = theme || 'theme-orbital';
+      window._initialShowGift = showGift;
+    })();
+  </script>
   <!-- ====== GIFT WRAP OVERLAY ====== -->
-  <div class="gift-wrap-overlay" id="giftWrap" style="display:none;">
+  <div class="gift-wrap-overlay" id="giftWrap">
+    <script>
+      if (!window._initialShowGift) document.getElementById('giftWrap').style.display = 'none';
+    </script>
     <div class="gift-wrap-left"></div>
     <div class="gift-wrap-right"></div>
     <div class="gift-ribbon-horizontal"></div>
