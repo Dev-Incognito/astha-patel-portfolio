@@ -213,11 +213,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);height:
   <div class="modal">
     <h3>Publish to GitHub</h3>
     <p>Commits data/content.json and data/feature-flags.json to the repo. Vercel auto-deploys within ~30 seconds.</p>
-    <div class="ff">
-      <label class="fl">GitHub Personal Access Token</label>
-      <input type="password" class="fi" id="ghTok" placeholder="ghp_...">
-      <div class="mhint">Needs <strong>repo</strong> scope. Stored in session only.</div>
-    </div>
+
     <div class="pprog" id="pprog" style="display:none;"></div>
     <div class="macts" id="macts">
       <button class="btn bghost" onclick="closePub()">Cancel</button>
@@ -274,7 +270,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-async function initDash(){await load();show('hero');const t=sessionStorage.getItem(ST);if(t)document.getElementById('ghTok').value=t;}
+async function initDash(){await load();show('hero');}
 async function load(){
   const lc=localStorage.getItem(LSC);
   if(lc){try{content=JSON.parse(lc);}catch(e){await fc();}}else{await fc();}
@@ -546,17 +542,14 @@ function rRaw(){
 function onRC(v){try{content=JSON.parse(v);document.getElementById('rcst').textContent='Valid JSON';document.getElementById('rcst').style.color='var(--ok)';dsv();}catch(e){document.getElementById('rcst').textContent=e.message;document.getElementById('rcst').style.color='var(--err)';}}
 function onRF(v){try{flags=JSON.parse(v);document.getElementById('rfst').textContent='Valid JSON';document.getElementById('rfst').style.color='var(--ok)';dsv();}catch(e){document.getElementById('rfst').textContent=e.message;document.getElementById('rfst').style.color='var(--err)';}}
 
-function openPub(){const t=sessionStorage.getItem(ST);if(t)document.getElementById('ghTok').value=t;document.getElementById('pprog').style.display='none';document.getElementById('macts').style.display='flex';document.getElementById('pubBtn').textContent='Publish Now';document.getElementById('pubBtn').onclick=doPub;document.getElementById('pubModal').classList.add('open');}
+function openPub(){document.getElementById('pprog').style.display='none';document.getElementById('macts').style.display='flex';document.getElementById('pubBtn').textContent='Publish Now';document.getElementById('pubBtn').onclick=doPub;document.getElementById('pubModal').classList.add('open');}
 function closePub(){document.getElementById('pubModal').classList.remove('open');}
 async function doPub(){
-  const tok=document.getElementById('ghTok').value.trim();
-  if(!tok){toast('Enter a GitHub Personal Access Token.','er');return;}
-  sessionStorage.setItem(ST,tok);
   document.getElementById('macts').style.display='none';
   const pp=document.getElementById('pprog');pp.style.display='flex';
   const steps=[
-    {l:'Commit data/content.json',fn:()=>ghC(tok,'data/content.json',content)},
-    {l:'Commit data/feature-flags.json',fn:()=>ghC(tok,'data/feature-flags.json',flags)},
+    {l:'Commit data/content.json',fn:()=>ghC('data/content.json',content)},
+    {l:'Commit data/feature-flags.json',fn:()=>ghC('data/feature-flags.json',flags)},
     {l:'Triggering Vercel redeploy',fn:()=>new Promise(r=>setTimeout(r,900))}
   ];
   pp.innerHTML=steps.map((s,i)=>'<div class="pst" id="ps'+i+'"><div class="psi">*</div><span>'+s.l+'</span></div>').join('');
@@ -575,16 +568,11 @@ async function doPub(){
   }
   document.getElementById('macts').style.display='flex';
   document.getElementById('pubBtn').textContent='Close';document.getElementById('pubBtn').onclick=closePub;
-  if(ok){toast('Published! Vercel is deploying.','ok');setSt(false);}else{toast('Publish failed. Check token.','er');}
+  if(ok){toast('Published! Vercel is deploying.','ok');setSt(false);}else{toast('Publish failed. Check Vercel logs.','er');}
 }
-async function ghC(tok,path,data){
-  const url='https://api.github.com/repos/'+RO+'/'+RN+'/contents/'+path;
-  const gr=await fetch(url,{headers:{'Authorization':'Bearer '+tok,'Accept':'application/vnd.github.v3+json'}});
-  if(!gr.ok){const e=await gr.json();throw new Error('GET '+path+': '+e.message);}
-  const sha=(await gr.json()).sha;
-  const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
-  const pr=await fetch(url,{method:'PUT',headers:{'Authorization':'Bearer '+tok,'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'},body:JSON.stringify({message:'Admin: update '+path,content:encoded,sha})});
-  if(!pr.ok){const e=await pr.json();throw new Error('PUT '+path+': '+e.message);}
+async function ghC(path,data){
+  const pr=await fetch('/api/publish',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path,data})});
+  if(!pr.ok){const e=await pr.json();throw new Error('POST '+path+': '+(e.error||e.message||pr.statusText));}
 }
 
 let tt;
