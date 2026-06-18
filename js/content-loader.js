@@ -236,8 +236,20 @@ function renderContact(data) {
     if (!contentRes.ok) throw new Error('Failed to load content.json');
     if (!flagsRes.ok)   throw new Error('Failed to load feature-flags.json');
 
-    const data  = await contentRes.json();
+    let data  = await contentRes.json();
     const flags = await flagsRes.json();
+
+    // ── Admin content override (set by admin panel) ──
+    try {
+      const adminContent = localStorage.getItem('astha-admin-content');
+      if (adminContent) data = JSON.parse(adminContent);
+    } catch(e) {}
+
+    // ── Merge localStorage flag overrides (from FF panel or admin panel) ──
+    try {
+      const storedFlags = localStorage.getItem('astha-portfolio-flags');
+      if (storedFlags) Object.assign(flags, JSON.parse(storedFlags));
+    } catch(e) {}
 
     const heroVariant = flags['hero-variant'] || 'orbital';
 
