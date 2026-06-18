@@ -3,7 +3,7 @@ module.exports = async function (req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const token = process.env.GITHUB_PAT || ('ghp_' + 'Xf7IiehaOv' + 'TT0yfXUNh8' + 'K8Tjer1YNm' + '17rtGS');
+  const token = process.env.GITHUB_PAT;
   if (!token) {
     return res.status(500).json({ error: 'GITHUB_PAT environment variable is not set in Vercel.' });
   }
