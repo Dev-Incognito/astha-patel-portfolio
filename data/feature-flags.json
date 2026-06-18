@@ -1,6 +1,6 @@
 {
   "lenis-scroll": true,
-  "custom-cursor": true,
+  "custom-cursor": false,
   "gift-wrap": true,
   "animations": true,
   "scroll-progress": true,

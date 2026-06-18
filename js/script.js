@@ -32,9 +32,9 @@ window.initializeAnimations = function() {
       // Remove any CSS transitions so GSAP can take over smoothly
       el.style.transition = 'none';
       gsap.fromTo(el, 
-        { y: 60, opacity: 0 },
+        { y: 60, opacity: 0, filter: "blur(2px)" },
         { 
-          y: 0, opacity: 1, duration: 1.2, ease: "power3.out",
+          y: 0, opacity: 1, filter: "blur(0px)", duration: 1.2, ease: "power3.out",
           scrollTrigger: {
             trigger: el,
             start: "top 85%",
