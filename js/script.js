@@ -143,6 +143,63 @@ window.initializeAnimations = function() {
     }
   }
 
+  // ---------- 7. Premium Typography Animations (ScrollTrigger) ----------
+  if (typeof SplitType !== 'undefined' && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !window._minimalTextAnimInit) {
+    window._minimalTextAnimInit = true;
+    
+    // Word-level blur reveal for paragraphs and titles
+    const textBlocks = document.querySelectorAll(`
+      .section-title, .section-subtitle, .intro-text p, 
+      .brand-quote, .biz-narrative p, .contact-cta-text, 
+      .vision-statement p, .contact-references p, 
+      .exp-description, .diff-card p, .cap-item p, 
+      .biz-highlight p, .vision-pillar p,
+      .value-card h3, .exp-role, .exp-company, .diff-card h3,
+      .biz-highlight h4, .cap-item h3, .vision-pillar h3
+    `.replace(/\s+/g, ' '));
+    textBlocks.forEach(block => {
+      if (block.classList.contains('split-applied') || block.textContent.trim().length === 0) return;
+      block.classList.add('split-applied');
+      
+      const split = new SplitType(block, { types: 'lines, words' });
+      gsap.from(split.words, {
+        scrollTrigger: {
+          trigger: block,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 15,
+        filter: "blur(4px)",
+        duration: 0.8,
+        stagger: 0.015,
+        ease: "power2.out"
+      });
+    });
+
+    // Character-level slide reveal for section labels
+    const labels = document.querySelectorAll('.section-label');
+    labels.forEach(label => {
+      if (label.classList.contains('split-applied') || label.textContent.trim().length === 0) return;
+      label.classList.add('split-applied');
+      
+      const split = new SplitType(label, { types: 'chars' });
+      gsap.from(split.chars, {
+        scrollTrigger: {
+          trigger: label,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        x: -10,
+        filter: "blur(2px)",
+        duration: 0.6,
+        stagger: 0.04,
+        ease: "power2.out"
+      });
+    });
+  }
+
   // ---------- Diff numbers - replay ----------
   const diffNumbers = document.querySelectorAll('.diff-number:not(.diff-observed)');
   const diffObserver = new IntersectionObserver((entries) => {
