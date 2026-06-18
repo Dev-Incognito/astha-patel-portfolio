@@ -58,6 +58,71 @@ window.initializeAnimations = function() {
     revealElements.forEach(el => { el.classList.add('observed'); revealObserver.observe(el); });
   }
 
+  // ---------- 6. Premium Text Animations ----------
+  const heroNameEl = document.querySelector('.hero-name, .hero-cin-name, .hero-pro-name, .hero-pook-name, .hero-mod-name, .hero-gal-name, .hero-art-name');
+  if (heroNameEl && !window._textAnimInit) {
+    window._textAnimInit = true;
+    
+    // Check which theme is active
+    const theme = Array.from(document.body.classList).find(c => c.startsWith('theme-')) || 'theme-orbital';
+    
+    if (theme === 'theme-artistic' && typeof Blotter !== 'undefined') {
+      // Blotter.js Liquid Distortion
+      const text = heroNameEl.textContent.replace(/\s+/g, ' ').trim();
+      const material = new Blotter.LiquidDistortMaterial();
+      material.uniforms.uSpeed.value = 0.3;
+      material.uniforms.uVolatility.value = 0.05;
+      
+      // Calculate font size
+      const computedStyle = window.getComputedStyle(heroNameEl);
+      const fontSize = parseFloat(computedStyle.fontSize) || 80;
+      
+      const blotterText = new Blotter.Text(text, {
+        family: "'Inter', sans-serif",
+        size: fontSize,
+        fill: "#e94560",
+        paddingLeft: 40,
+        paddingRight: 40
+      });
+      const blotter = new Blotter(material, { texts: blotterText });
+      const scope = blotter.forText(blotterText);
+      heroNameEl.innerHTML = '';
+      scope.appendTo(heroNameEl);
+      
+      heroNameEl.addEventListener('mouseenter', () => {
+        gsap.to(material.uniforms.uVolatility, { value: 0.15, duration: 0.5 });
+      });
+      heroNameEl.addEventListener('mouseleave', () => {
+        gsap.to(material.uniforms.uVolatility, { value: 0.05, duration: 1.5 });
+      });
+      
+    } else if ((theme === 'theme-modern' || theme === 'theme-galaxy') && typeof baffle !== 'undefined') {
+      // Baffle.js Glitch
+      const b = baffle(heroNameEl, {
+        characters: '█▓▒░/|\\-<>+*^[]{}',
+        speed: 75
+      }).start();
+      setTimeout(() => b.reveal(1500), 500);
+      
+      heroNameEl.addEventListener('mouseenter', () => {
+        b.start();
+        setTimeout(() => b.reveal(1000), 100);
+      });
+      
+    } else if (typeof SplitType !== 'undefined' && typeof gsap !== 'undefined') {
+      // SplitType + GSAP Premium Reveal
+      const split = new SplitType(heroNameEl, { types: 'chars, words' });
+      gsap.from(split.chars, {
+        opacity: 0,
+        y: 60,
+        rotateX: -90,
+        stagger: 0.05,
+        duration: 1.2,
+        ease: "back.out(1.7)"
+      });
+    }
+  }
+
   // ---------- 5. Premium Typing Animation (TypeIt) ----------
   if (typeof TypeIt !== 'undefined' && !window._typeItInit) {
     const taglineEl = document.querySelector('.hero-tagline, .hero-cin-tagline-small, .hero-pro-tagline');
