@@ -446,41 +446,7 @@
     <div class="section-inner">
       <div class="section-label reveal" style="justify-content: center;">08 - Let's Connect</div>
       <h2 class="section-title reveal reveal-delay-1" style="text-align: center;">Get in Touch</h2>
-
-      <div class="contact-card reveal reveal-delay-2">
-        <img src="assets/portrait.png" alt="Astha Patel" class="contact-portrait" loading="lazy">
-        <div class="contact-name">Astha Patel</div>
-        <div class="contact-tagline">People . Trust . Excellence</div>
-
-        <div class="contact-info">
-          <div class="contact-item">
-            <span class="icon">E</span>
-            <span>astha.patel@email.com</span>
-          </div>
-          <div class="contact-item">
-            <span class="icon">P</span>
-            <span>+91 XXXXX XXXXX</span>
-          </div>
-          <div class="contact-item">
-            <span class="icon">L</span>
-            <span>Khalilabad, Sant Kabir Nagar, Uttar Pradesh</span>
-          </div>
-          <div class="contact-item">
-            <span class="icon">S</span>
-            <span>English and Hindi</span>
-          </div>
-        </div>
-
-        <div class="contact-divider"></div>
-
-        <p class="contact-footer">
-          "I would welcome the chance to introduce myself properly and show you what I can bring to your team."
-        </p>
-      </div>
-
-      <div style="margin-top: 50px; text-align: center;" class="reveal reveal-delay-3" data-block="references">
-        <p style="font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--medium-gray);">References available upon request</p>
-      </div>
+      <!-- Contact grid injected by content-loader.js -->
     </div>
   </section>
 
@@ -552,6 +518,15 @@
           <input type="checkbox" checked>
           <span class="ff-switch"></span>
         </label>
+        <!-- Hero variant selector (writes to feature-flags.json via localStorage) -->
+        <div style="padding: 10px 0 4px; display:flex; flex-direction:column; gap:6px;">
+          <span style="font-size:0.72rem; letter-spacing:0.08em; color:rgba(255,255,255,0.4); text-transform:uppercase;">Hero Variant</span>
+          <select id="heroVariantSelect" style="background:#1a1a1f; color:#fff; border:1px solid rgba(255,255,255,0.12); border-radius:6px; padding:7px 10px; font-size:0.82rem; width:100%; cursor:pointer;">
+            <option value="orbital">Orbital (Default)</option>
+            <option value="cinematic">Cinematic (Dark Film)</option>
+            <option value="editorial">Editorial (Magazine)</option>
+          </select>
+        </div>
         <label class="ff-toggle" data-flag="hero-name">
           <span class="ff-toggle-label">Name</span>
           <input type="checkbox" checked>
@@ -704,6 +679,11 @@
         </label>
         <label class="ff-toggle" data-flag="contact-info">
           <span class="ff-toggle-label">Contact Details</span>
+          <input type="checkbox" checked>
+          <span class="ff-switch"></span>
+        </label>
+        <label class="ff-toggle" data-flag="contact-social">
+          <span class="ff-toggle-label">Social Media Buttons</span>
           <input type="checkbox" checked>
           <span class="ff-switch"></span>
         </label>

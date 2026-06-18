@@ -133,12 +133,32 @@
     "cardName": "Astha Patel",
     "cardTagline": "People . Trust . Excellence",
     "info": [
-      { "icon": "E", "text": "astha.patel@email.com" },
-      { "icon": "P", "text": "+91 XXXXX XXXXX" },
-      { "icon": "L", "text": "Khalilabad, Sant Kabir Nagar, Uttar Pradesh" },
-      { "icon": "S", "text": "English and Hindi" }
+      { "icon": "E", "label": "Email", "text": "astha.patel@email.com" },
+      { "icon": "P", "label": "Phone", "text": "+91 XXXXX XXXXX" },
+      { "icon": "L", "label": "Location", "text": "Khalilabad, Sant Kabir Nagar, UP" },
+      { "icon": "S", "label": "Languages", "text": "English and Hindi" }
     ],
     "footer": "\"I would welcome the chance to introduce myself properly and show you what I can bring to your team.\"",
-    "references": "References available upon request"
+    "references": "References available upon request",
+    "social": [
+      {
+        "platform": "instagram",
+        "label": "Instagram",
+        "handle": "@astha.patel",
+        "url": "https://instagram.com/astha.patel"
+      },
+      {
+        "platform": "x",
+        "label": "X (Twitter)",
+        "handle": "@asthapatel",
+        "url": "https://x.com/asthapatel"
+      },
+      {
+        "platform": "facebook",
+        "label": "Facebook",
+        "handle": "Astha Patel",
+        "url": "https://facebook.com/asthapatel"
+      }
+    ]
   }
 }

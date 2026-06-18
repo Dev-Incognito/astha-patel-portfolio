@@ -54,8 +54,9 @@
     'vision-closing-quote': { action: 'hide', selector: '#vision [data-block="closing-quote"]' },
 
     // Contact elements
-    'contact-portrait':    { action: 'hide', selector: '.contact-portrait' },
-    'contact-info':        { action: 'hide', selector: '.contact-info' },
+    'contact-portrait':    { action: 'hide', selector: '.contact-avatar' },
+    'contact-info':        { action: 'hide', selector: '.contact-details-list' },
+    'contact-social':      { action: 'hide', selector: '.contact-social-panel' },
     'contact-references':  { action: 'hide', selector: '#contact [data-block="references"]' },
 
     // Visual effects (these use JS-level flags, read by script.js)
@@ -217,6 +218,20 @@
       saveFlags();
       applyFlag(flagName, isEnabled);
     });
+
+    // Hero variant dropdown
+    const heroVariantSelect = document.getElementById('heroVariantSelect');
+    if (heroVariantSelect) {
+      // Set current value
+      heroVariantSelect.value = flags['hero-variant'] || 'orbital';
+
+      heroVariantSelect.addEventListener('change', () => {
+        flags['hero-variant'] = heroVariantSelect.value;
+        saveFlags();
+        // Reload to apply the new hero variant (content-loader re-renders on load)
+        window.location.reload();
+      });
+    }
 
     // Keyboard: Escape to close
     document.addEventListener('keydown', (e) => {

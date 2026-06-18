@@ -1,50 +1,273 @@
 /* ============================================
    CONTENT LOADER
-   Fetches content.json and populates the DOM,
+   Fetches content.json + feature-flags.json,
+   renders hero variant, injects all content,
    then kicks off animations.
    ============================================ */
 
+/* ─── SVG Icon Library ─── */
+const SOCIAL_ICONS = {
+  instagram: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
+  x: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.74l7.73-8.835L1.254 2.25H8.08l4.26 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+  facebook: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`
+};
+
+/* ─── QR Code Modal ─── */
+function createQRModal() {
+  const backdrop = document.createElement('div');
+  backdrop.className = 'qr-modal-backdrop';
+  backdrop.id = 'qrModal';
+  backdrop.innerHTML = `
+    <div class="qr-modal" role="dialog" aria-modal="true" aria-label="Social QR Code">
+      <button class="qr-modal-close" id="qrModalClose" aria-label="Close">&times;</button>
+      <div class="qr-modal-icon" id="qrModalIcon"></div>
+      <div class="qr-modal-platform" id="qrModalPlatform"></div>
+      <div class="qr-modal-qr">
+        <img id="qrModalImg" src="" alt="QR Code" width="176" height="176">
+      </div>
+      <div class="qr-modal-handle" id="qrModalHandle"></div>
+      <div class="qr-modal-label">Scan to connect</div>
+      <a class="qr-modal-link" id="qrModalLink" href="#" target="_blank" rel="noopener">Open Profile</a>
+    </div>
+  `;
+  document.body.appendChild(backdrop);
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('qrModalClose').addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  return {
+    open(platform, label, handle, url) {
+      document.getElementById('qrModalIcon').innerHTML = SOCIAL_ICONS[platform] || '';
+      document.getElementById('qrModalPlatform').textContent = label;
+      document.getElementById('qrModalHandle').textContent = handle;
+      document.getElementById('qrModalLink').href = url;
+      // Use qr-server.com free API for QR generation
+      const encoded = encodeURIComponent(url);
+      document.getElementById('qrModalImg').src =
+        `https://api.qrserver.com/v1/create-qr-code/?size=176x176&margin=0&color=0-0-0&bgcolor=255-255-255&data=${encoded}`;
+      backdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+}
+
+/* ─── Hero Templates ─── */
+function renderHeroOrbital(data) {
+  const hero = document.getElementById('hero');
+  hero.className = 'hero';
+  hero.innerHTML = `
+    <div class="hero-bg-element hero-bg-1"></div>
+    <div class="hero-bg-element hero-bg-2"></div>
+    <div class="hero-bg-element hero-bg-3"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-name">${data.hero.nameFirst}<span>${data.hero.nameLast}</span></h1>
+        <div class="hero-tagline">
+          ${data.hero.tagline.map((t, i, a) =>
+            `<span>${t}</span>${i < a.length - 1 ? '<span class="dot"></span>' : ''}`
+          ).join('')}
+        </div>
+        <p class="hero-statement">${data.hero.statement}</p>
+        <div class="hero-scroll" onclick="scrollToSection('brand')">
+          <div class="scroll-line"></div>
+          <span>${data.hero.scrollBtn}</span>
+        </div>
+      </div>
+      <div class="hero-portrait">
+        <div class="portrait-frame">
+          <img src="assets/portrait.png" alt="${data.hero.nameFirst} ${data.hero.nameLast}" class="portrait-img" fetchpriority="high">
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderHeroCinematic(data) {
+  const hero = document.getElementById('hero');
+  hero.className = 'hero hero--cinematic';
+  hero.innerHTML = `
+    <div class="hero-cin-bg">
+      <img src="assets/portrait.png" class="hero-cin-portrait-bg" alt="" role="presentation" fetchpriority="high">
+      <div class="hero-cin-overlay"></div>
+    </div>
+    <div class="hero-cin-grain"></div>
+    <div class="hero-cin-scanline"></div>
+    <div class="hero-cin-content">
+      <div class="hero-cin-eyebrow">Personal Brand Portfolio</div>
+      <h1 class="hero-cin-name">
+        ${data.hero.nameFirst}
+        <span class="cin-last">${data.hero.nameLast}</span>
+      </h1>
+      <div class="hero-cin-divider"></div>
+      <p class="hero-cin-statement">${data.hero.statement}</p>
+      <div class="hero-cin-actions">
+        <button class="hero-cin-btn" onclick="scrollToSection('brand')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          ${data.hero.scrollBtn}
+        </button>
+        <span class="hero-cin-tagline-small">${data.hero.tagline.join(' · ')}</span>
+      </div>
+    </div>
+    <div class="hero-cin-meta">
+      <span>Age 19</span>
+      <span>Khalilabad · UP · IN</span>
+      <span>EN · HI</span>
+    </div>
+  `;
+}
+
+function renderHeroEditorial(data) {
+  const hero = document.getElementById('hero');
+  hero.className = 'hero hero--editorial';
+
+  // Build double marquee text for seamless loop
+  const marqueeText = Array(8).fill(null).map(() =>
+    data.hero.tagline.map(t => `<span>${t}</span>`).join('<span class="dot-sep">·</span>')
+  ).join('<span class="dot-sep" style="padding:0 16px">·</span>');
+
+  hero.innerHTML = `
+    <div class="hero-ed-bg-text" aria-hidden="true">
+      <div class="hero-ed-bg-first">${data.hero.nameFirst}</div>
+      <div class="hero-ed-bg-last">${data.hero.nameLast}</div>
+    </div>
+    <div class="hero-ed-center">
+      <div class="hero-ed-portrait-wrap">
+        <img src="assets/portrait.png" alt="${data.hero.nameFirst} ${data.hero.nameLast}" fetchpriority="high">
+        <span class="hero-ed-float-tag">People</span>
+        <span class="hero-ed-float-tag">Excellence</span>
+        <span class="hero-ed-float-tag">Trust</span>
+      </div>
+      <div class="hero-ed-name-block">
+        <h1 class="hero-ed-name">${data.hero.nameFirst} ${data.hero.nameLast}</h1>
+        <p class="hero-ed-statement">${data.hero.statement}</p>
+        <div class="hero-ed-scroll-hint" onclick="scrollToSection('brand')">
+          <span>Discover</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-ed-marquee" aria-hidden="true">
+      <div class="hero-ed-marquee-inner">${marqueeText}</div>
+    </div>
+  `;
+}
+
+/* ─── Build Contact Section ─── */
+function renderContact(data) {
+  const section = document.getElementById('contact');
+  const inner = section.querySelector('.section-inner');
+  if (!inner) return;
+
+  inner.querySelector('.section-label').textContent = data.contact.sectionLabel;
+  inner.querySelector('.section-title').textContent = data.contact.sectionTitle;
+
+  // Remove old card content, insert new grid
+  const existingGrid = inner.querySelector('.contact-grid');
+  if (existingGrid) existingGrid.remove();
+  const oldCard = inner.querySelector('.contact-card');
+  if (oldCard) oldCard.remove();
+  const oldRef = inner.querySelector('[data-block="references"]');
+  if (oldRef) oldRef.remove();
+
+  const detailsHtml = data.contact.info.map(item => `
+    <div class="contact-detail-row">
+      <div class="contact-detail-icon">${item.icon}</div>
+      <div>
+        <div class="contact-detail-label">${item.label}</div>
+        <div class="contact-detail-value">${item.text}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const socialHtml = (data.contact.social || []).map(s => `
+    <button class="social-icon-btn" data-platform="${s.platform}" data-handle="${s.handle}" data-url="${s.url}" data-label="${s.label}" aria-label="Open ${s.label} QR code">
+      <svg class="social-icon-svg" viewBox="0 0 24 24">${SOCIAL_ICONS[s.platform] ? SOCIAL_ICONS[s.platform].match(/<path[^>]+\/>/)[0] : ''}</svg>
+      <div class="social-btn-text">
+        <span class="social-btn-name">${s.label}</span>
+        <span class="social-btn-handle">${s.handle}</span>
+      </div>
+      <span class="social-btn-arrow">→</span>
+    </button>
+  `).join('');
+
+  const grid = document.createElement('div');
+  grid.className = 'contact-grid reveal';
+  grid.innerHTML = `
+    <div class="contact-profile">
+      <div class="contact-profile-header">
+        <img src="assets/portrait.png" class="contact-avatar" alt="${data.contact.cardName}" loading="lazy">
+        <div>
+          <h3 class="contact-profile-name">${data.contact.cardName}</h3>
+          <div class="contact-profile-tagline">${data.contact.cardTagline}</div>
+        </div>
+      </div>
+      <div class="contact-details-list">${detailsHtml}</div>
+      <p class="contact-cta-text">${data.contact.footer}</p>
+    </div>
+    <div class="contact-social-panel">
+      <div class="contact-social-heading">Connect on Social</div>
+      <div class="social-icon-buttons">${socialHtml}</div>
+      <p class="social-qr-hint">Tap any platform to scan the QR code</p>
+    </div>
+  `;
+  inner.appendChild(grid);
+
+  const refDiv = document.createElement('div');
+  refDiv.className = 'contact-references reveal reveal-delay-1';
+  refDiv.setAttribute('data-block', 'references');
+  refDiv.innerHTML = `<p>${data.contact.references}</p>`;
+  inner.appendChild(refDiv);
+}
+
+/* ─── Main Loader ─── */
 (async function() {
   try {
-    const response = await fetch('data/content.json');
-    if (!response.ok) throw new Error('Failed to load content.json');
-    const data = await response.json();
+    // Fetch content and feature flags in parallel
+    const [contentRes, flagsRes] = await Promise.all([
+      fetch('data/content.json'),
+      fetch('data/feature-flags.json')
+    ]);
 
-    // -- GLOBAL --
+    if (!contentRes.ok) throw new Error('Failed to load content.json');
+    if (!flagsRes.ok)   throw new Error('Failed to load feature-flags.json');
+
+    const data  = await contentRes.json();
+    const flags = await flagsRes.json();
+
+    const heroVariant = flags['hero-variant'] || 'orbital';
+
+    // ── Render Hero Variant ──
+    switch (heroVariant) {
+      case 'cinematic': renderHeroCinematic(data); break;
+      case 'editorial': renderHeroEditorial(data); break;
+      default:          renderHeroOrbital(data);
+    }
+
+    // ── Global ──
     document.querySelector('.nav-brand').textContent = data.global.navBrand;
     document.querySelector('.footer-brand').textContent = data.global.footerBrand;
     document.querySelector('.footer-text').textContent = data.global.footerText;
 
-    const navLinksList = document.getElementById('navLinks');
-    navLinksList.innerHTML = data.global.navLinks.map(link =>
-      `<li><a href="#${link.id}">${link.label}</a></li>`
+    document.getElementById('navLinks').innerHTML = data.global.navLinks.map(l =>
+      `<li><a href="#${l.id}">${l.label}</a></li>`
     ).join('');
 
-    const mobileNavEl = document.getElementById('mobileNav');
-    mobileNavEl.innerHTML = data.global.navLinks.map(link =>
-      `<a href="#${link.id}" onclick="closeMobileNav()">${link.label}</a>`
+    document.getElementById('mobileNav').innerHTML = data.global.navLinks.map(l =>
+      `<a href="#${l.id}" onclick="closeMobileNav()">${l.label}</a>`
     ).join('');
 
-    // -- HERO --
-    const heroName = document.querySelector('.hero-name');
-    heroName.innerHTML = `${data.hero.nameFirst}<span>${data.hero.nameLast}</span>`;
-
-    const heroTagline = document.querySelector('.hero-tagline');
-    heroTagline.innerHTML = data.hero.tagline.map((tag, i, arr) =>
-      `<span>${tag}</span>${i < arr.length - 1 ? '<span class="dot"></span>' : ''}`
-    ).join('');
-
-    document.querySelector('.hero-statement').textContent = data.hero.statement;
-    document.querySelector('.hero-scroll span').textContent = data.hero.scrollBtn;
-
-    // -- BRAND --
+    // ── Brand ──
     document.querySelector('#brand .section-label').textContent = data.brand.sectionLabel;
     document.querySelector('#brand .section-title').textContent = data.brand.sectionTitle;
     document.querySelector('#brand .section-subtitle').textContent = data.brand.sectionSubtitle;
     document.querySelector('.brand-quote').textContent = data.brand.quote;
 
-    const brandValues = document.querySelector('.brand-values');
-    brandValues.innerHTML = data.brand.values.map((v, i) => `
+    document.querySelector('.brand-values').innerHTML = data.brand.values.map((v, i) => `
       <div class="value-card reveal reveal-delay-${i + 1}">
         <div class="value-icon">${v.icon}</div>
         <h3>${v.title}</h3>
@@ -52,42 +275,35 @@
       </div>
     `).join('');
 
-    // Philosophy block - target by data attribute to be safe
-    const philosophyBlock = document.querySelector('#brand [data-block="philosophy"]');
-    if (philosophyBlock) {
-      philosophyBlock.innerHTML = `
-        <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 500; margin-bottom: 16px; color: var(--charcoal);">${data.brand.philosophyTitle}</h3>
-        <p style="font-family: var(--font-display); font-size: 1.05rem; line-height: 1.9; color: var(--graphite); font-style: italic;">
-          ${data.brand.philosophyText}
-        </p>
-      `;
-    }
+    const philosophy = document.querySelector('#brand [data-block="philosophy"]');
+    if (philosophy) philosophy.innerHTML = `
+      <h3 style="font-family:var(--font-heading);font-size:1.15rem;font-weight:500;margin-bottom:16px;color:var(--charcoal);">${data.brand.philosophyTitle}</h3>
+      <p style="font-family:var(--font-display);font-size:1.05rem;line-height:1.9;color:var(--graphite);font-style:italic;">${data.brand.philosophyText}</p>
+    `;
 
-    // -- STRENGTHS --
+    // ── Strengths ──
     document.querySelector('#strengths .section-label').textContent = data.strengths.sectionLabel;
     document.querySelector('#strengths .section-title').textContent = data.strengths.sectionTitle;
     document.querySelector('#strengths .section-subtitle').textContent = data.strengths.sectionSubtitle;
 
-    const expTimeline = document.querySelector('.exp-timeline');
-    expTimeline.innerHTML = data.strengths.timeline.map((item, i) => `
+    document.querySelector('.exp-timeline').innerHTML = data.strengths.timeline.map((item, i) => `
       <div class="exp-item reveal ${i > 0 ? 'reveal-delay-' + i : ''}">
         <div class="exp-period">${item.period}</div>
         <div class="exp-role">${item.role}</div>
         <div class="exp-company">${item.company}</div>
         <p class="exp-description">${item.desc}</p>
         <div class="exp-skills">
-          ${item.skills.map(skill => `<span class="exp-skill-tag">${skill}</span>`).join('')}
+          ${item.skills.map(s => `<span class="exp-skill-tag">${s}</span>`).join('')}
         </div>
       </div>
     `).join('');
 
-    // -- DIFFERENTIATORS --
+    // ── Differentiators ──
     document.querySelector('#differentiators .section-label').textContent = data.differentiators.sectionLabel;
     document.querySelector('#differentiators .section-title').textContent = data.differentiators.sectionTitle;
     document.querySelector('#differentiators .section-subtitle').textContent = data.differentiators.sectionSubtitle;
 
-    const diffGrid = document.querySelector('.diff-grid');
-    diffGrid.innerHTML = data.differentiators.cards.map((card, i) => `
+    document.querySelector('.diff-grid').innerHTML = data.differentiators.cards.map((card, i) => `
       <div class="diff-card reveal reveal-delay-${(i % 3) + 1}">
         <div class="diff-number">${card.number}</div>
         <h3>${card.title}</h3>
@@ -95,7 +311,7 @@
       </div>
     `).join('');
 
-    // -- EXPOSURE --
+    // ── Exposure ──
     document.querySelector('#exposure .section-label').textContent = data.exposure.sectionLabel;
     document.querySelector('#exposure .section-title').textContent = data.exposure.sectionTitle;
     document.querySelector('#exposure .section-subtitle').textContent = data.exposure.sectionSubtitle;
@@ -113,7 +329,7 @@
       </div>
     `).join('');
 
-    // -- CAPABILITIES --
+    // ── Capabilities ──
     document.querySelector('#capabilities .section-label').textContent = data.capabilities.sectionLabel;
     document.querySelector('#capabilities .section-title').textContent = data.capabilities.sectionTitle;
     document.querySelector('#capabilities .section-subtitle').textContent = data.capabilities.sectionSubtitle;
@@ -128,17 +344,23 @@
           <div class="cap-item">
             <h3>${item.title}</h3>
             <div class="cap-bar-container">
-              <div class="cap-bar" style="width: ${item.progress}"></div>
+              <div class="cap-bar" style=""></div>
             </div>
             <p>${item.desc}</p>
           </div>
         `;
       }
-      capHtml += `</div>`;
+      capHtml += '</div>';
     }
     capVisual.innerHTML = capHtml;
 
-    // -- VISION --
+    // Store target widths as data attributes for replay-safe animation
+    const capItems = data.capabilities.items;
+    capVisual.querySelectorAll('.cap-bar').forEach((bar, i) => {
+      bar.dataset.targetWidth = capItems[i] ? capItems[i].progress : '80%';
+    });
+
+    // ── Vision ──
     document.querySelector('#vision .section-label').textContent = data.vision.sectionLabel;
     document.querySelector('#vision .section-title').textContent = data.vision.sectionTitle;
     document.querySelector('.vision-statement').innerHTML = data.vision.statement;
@@ -151,45 +373,58 @@
       </div>
     `).join('');
 
-    const visionQuoteEl = document.querySelector('#vision [data-block="closing-quote"] p');
-    if (visionQuoteEl) visionQuoteEl.textContent = data.vision.closingQuote;
+    const vq = document.querySelector('#vision [data-block="closing-quote"] p');
+    if (vq) vq.textContent = data.vision.closingQuote;
 
-    // -- INTRODUCTION --
+    // ── Introduction ──
     document.querySelector('#introduction .section-label').textContent = data.introduction.sectionLabel;
     document.querySelector('#introduction .section-title').textContent = data.introduction.sectionTitle;
-
     document.querySelector('.intro-text').innerHTML = data.introduction.paragraphs.map(p => `<p>${p}</p>`).join('');
     document.querySelector('.intro-signature .name').textContent = data.introduction.signature;
 
-    // -- CONTACT --
-    document.querySelector('#contact .section-label').textContent = data.contact.sectionLabel;
-    document.querySelector('#contact .section-title').textContent = data.contact.sectionTitle;
+    // ── Contact (full redesign) ──
+    renderContact(data);
 
-    document.querySelector('.contact-name').textContent = data.contact.cardName;
-    document.querySelector('.contact-tagline').textContent = data.contact.cardTagline;
-
-    document.querySelector('.contact-info').innerHTML = data.contact.info.map(info => `
-      <div class="contact-item">
-        <span class="icon">${info.icon}</span>
-        <span>${info.text}</span>
-      </div>
-    `).join('');
-
-    document.querySelector('.contact-footer').textContent = data.contact.footer;
-
-    const referencesEl = document.querySelector('#contact [data-block="references"] p');
-    if (referencesEl) referencesEl.textContent = data.contact.references;
-
-    console.log('✦ Content loaded from content.json');
-  } catch (error) {
-    console.error('Content loader error:', error);
+    console.log(`✦ Content loaded · Hero: ${heroVariant}`);
+  } catch (err) {
+    console.error('Content loader error:', err);
   }
 
-  // Initialize animations after content injection
-  // Uses requestAnimationFrame to ensure DOM has painted
+  // Kick off animations after a paint frame
   requestAnimationFrame(() => {
     if (typeof window.initializeAnimations === 'function') {
       window.initializeAnimations();
+    }
+
+    // Wire up social QR buttons (after contact DOM is rendered)
+    const qrModal = createQRModal();
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.social-icon-btn');
+      if (!btn) return;
+      qrModal.open(
+        btn.dataset.platform,
+        btn.dataset.label,
+        btn.dataset.handle,
+        btn.dataset.url
+      );
+    });
+
+    // Cap bar replay: observe each bar and animate to its data-targetWidth
+    const capBars = document.querySelectorAll('.cap-bar[data-target-width]');
+    if (capBars.length) {
+      const barReplayObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const bar = entry.target;
+          if (entry.isIntersecting) {
+            bar.style.transform = 'scaleX(0)';
+            void bar.offsetWidth;
+            requestAnimationFrame(() => bar.classList.add('animate'));
+          } else {
+            bar.classList.remove('animate');
+          }
+        });
+      }, { threshold: 0.5 });
+      capBars.forEach(bar => barReplayObserver.observe(bar));
     }
   });
 })();
