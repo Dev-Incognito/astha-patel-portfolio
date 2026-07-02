@@ -19,7 +19,7 @@
       --gray:      #555;
       --gray-lt:   #f4f4f6;
       --line:      #e2e2e8;
-      --sb-w:      72mm;   /* sidebar width */
+      --sb-w:      72mm;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,10 +34,9 @@
       gap: 48px;
     }
 
-    /* â”€â”€ A4 page shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .page {
-      width:  210mm;
-      min-height: 297mm;      /* never clips " content expands freely */
+      width: 210mm;
+      min-height: 297mm;
       background: var(--white);
       box-shadow: 0 20px 60px rgba(0,0,0,.7);
       display: flex;
@@ -48,13 +47,12 @@
     @page { size: A4; margin: 0; }
     @media print {
       body { background: white; padding: 0; gap: 0; }
-      /* each .page div forces a new sheet */
       .page { box-shadow: none; break-inside: avoid; break-after: page; }
       .page:last-child { break-after: auto; }
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     }
 
-    /* â”€â”€ LEFT SIDEBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* LEFT SIDEBAR */
     .sb {
       width: var(--sb-w);
       flex-shrink: 0;
@@ -64,9 +62,7 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      /* no overflow:hidden " sidebar stretches with content */
     }
-    /* accent strip */
     .sb::after {
       content: '';
       position: absolute;
@@ -74,7 +70,6 @@
       width: 3px; height: 100%;
       background: linear-gradient(to bottom, var(--rose), transparent 80%);
     }
-    /* decorative arch behind photo */
     .sb-arch {
       background: var(--dark-2);
       padding: 32px 24px 20px;
@@ -89,8 +84,6 @@
       background: var(--dark-2);
       clip-path: ellipse(55% 100% at 50% 0%);
     }
-
-    /* Portrait */
     .portrait-wrap {
       width: 100%;
       aspect-ratio: 1;
@@ -107,11 +100,7 @@
       object-position: top center;
       display: block;
     }
-
-    /* Sidebar sections */
     .sb-body { padding: 0 22px; display: flex; flex-direction: column; gap: 22px; }
-
-    .sb-section {}
     .sb-section-title {
       font-family: 'Cinzel', serif;
       font-size: .62rem;
@@ -122,14 +111,10 @@
       margin-bottom: 12px;
       border-bottom: 1px solid rgba(194,114,126,.25);
     }
-
-    /* Contact */
     .contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .contact-item { display: flex; align-items: flex-start; gap: 9px; font-size: .75rem; font-weight: 300; line-height: 1.4; color: var(--text-d2); }
     .c-icon { width: 13px; height: 13px; fill: var(--rose); flex-shrink: 0; margin-top: 1px; }
     .contact-item a { color: var(--rose-pale); text-decoration: none; word-break: break-all; }
-
-    /* Skills badges */
     .skill-group { margin-bottom: 10px; }
     .skill-group-label { font-size: .65rem; font-weight: 600; color: var(--text-d2); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 7px; }
     .skill-pills { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -140,33 +125,25 @@
       color: var(--text-d);
       padding: 3px 9px;
       border-radius: 20px;
-      font-weight: 400;
     }
-
-    /* Cap bars */
     .cap-list { display: flex; flex-direction: column; gap: 10px; }
-    .cap-title { font-size: .68rem; display: flex; justify-content: space-between; color: var(--text-d2); margin-bottom: 4px; font-weight: 400; }
+    .cap-title { font-size: .68rem; display: flex; justify-content: space-between; color: var(--text-d2); margin-bottom: 4px; }
     .cap-title span:last-child { color: var(--rose); font-weight: 600; }
     .cap-bg { width: 100%; height: 3px; background: rgba(255,255,255,.08); border-radius: 2px; }
     .cap-fill { height: 100%; background: var(--rose); border-radius: 2px; }
-
-    /* Differentiators list */
     .diff-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .diff-item { position: relative; padding-left: 14px; font-size: .73rem; font-weight: 300; line-height: 1.5; color: var(--text-d2); }
-    .diff-item::before { content: 'âœ¦'; position: absolute; left: 0; top: 2px; font-size: .5rem; color: var(--rose); }
+    .diff-item::before { content: '\2736'; position: absolute; left: 0; top: 2px; font-size: .5rem; color: var(--rose); }
     .diff-item strong { color: var(--text-d); font-weight: 600; display: block; font-size: .73rem; }
 
-    /* â”€â”€ MAIN CONTENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* MAIN */
     .main {
       flex: 1;
-      padding: 0;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       position: relative;
     }
-
-    /* Watermark */
     .wm {
       position: absolute;
       bottom: -60px; right: -40px;
@@ -179,8 +156,6 @@
       z-index: 0;
       user-select: none;
     }
-
-    /* Page header strip (only page 1) */
     .main-header {
       background: var(--primary);
       padding: 32px 36px 26px;
@@ -217,8 +192,6 @@
       border-left: 2px solid var(--rose);
       padding-left: 14px;
     }
-
-    /* Generic page header strip (pages 2, 3) */
     .page-header-strip {
       background: var(--primary);
       padding: 14px 36px;
@@ -238,13 +211,7 @@
       letter-spacing: .15em;
     }
     .page-header-strip .name-mini span { color: var(--rose); }
-    .page-header-strip .pg-num {
-      font-size: .68rem;
-      color: var(--rose-pale);
-      letter-spacing: .2em;
-    }
-
-    /* Main content body */
+    .page-header-strip .pg-num { font-size: .68rem; color: var(--rose-pale); letter-spacing: .2em; }
     .main-body {
       flex: 1;
       padding: 28px 36px;
@@ -253,10 +220,7 @@
       gap: 28px;
       position: relative;
       z-index: 1;
-      overflow: hidden;
     }
-
-    /* Section title */
     .sec-title {
       font-family: 'Cinzel', serif;
       font-size: 1rem;
@@ -276,8 +240,6 @@
       width: 36px; height: 2px;
       background: var(--rose);
     }
-
-    /* Experience entry */
     .exp-block { margin-bottom: 20px; }
     .exp-block:last-child { margin-bottom: 0; }
     .exp-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
@@ -286,43 +248,28 @@
     .exp-org { font-family: 'Playfair Display', serif; font-style: italic; font-size: .85rem; color: var(--gray); margin-bottom: 9px; }
     .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
     .exp-bullets li { font-size: .82rem; line-height: 1.6; color: #444; padding-left: 16px; position: relative; }
-    .exp-bullets li::before { content: 'â–¸'; position: absolute; left: 0; top: 0; color: var(--rose); font-size: .7rem; }
-
-    /* Tags row */
+    .exp-bullets li::before { content: '\25B8'; position: absolute; left: 0; top: 0; color: var(--rose); font-size: .7rem; }
     .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
     .tag-row span {
       font-size: .65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
-      background: var(--gray-lt);
-      color: var(--gray);
-      border: 1px solid var(--line);
-      padding: 3px 9px;
-      border-radius: 3px;
+      background: var(--gray-lt); color: var(--gray);
+      border: 1px solid var(--line); padding: 3px 9px; border-radius: 3px;
     }
-
-    /* Summary paragraph */
     .summary-text { font-size: .85rem; line-height: 1.75; color: #444; text-align: justify; }
-
-    /* Diff cards grid (page 3) */
     .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .diff-card { background: var(--gray-lt); border-top: 3px solid var(--rose); border-radius: 4px; padding: 16px; }
     .diff-card h4 { font-size: .85rem; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
     .diff-card p { font-size: .78rem; line-height: 1.6; color: var(--gray); }
-
-    /* Values row */
     .values-row { display: flex; gap: 20px; }
     .val-item { flex: 1; }
     .val-item h4 { font-size: .85rem; font-weight: 600; color: var(--primary); margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
-    .val-item h4::before { content: 'âœ¦'; color: var(--rose); font-size: .6rem; }
+    .val-item h4::before { content: '\2736'; color: var(--rose); font-size: .6rem; }
     .val-item p { font-size: .78rem; line-height: 1.6; color: var(--gray); }
-
-    /* Vision */
     .vision-pillars { display: flex; gap: 20px; }
     .vision-pillar { flex: 1; text-align: center; padding: 16px 12px; background: var(--gray-lt); border-radius: 6px; }
     .vision-pillar .v-icon { font-family: 'Cinzel', serif; font-size: .7rem; font-weight: 700; color: var(--rose); letter-spacing: .1em; margin-bottom: 8px; }
     .vision-pillar h4 { font-size: .82rem; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
     .vision-pillar p { font-size: .73rem; line-height: 1.55; color: var(--gray); }
-
-    /* Philosophy quote (dark box) */
     .quote-box {
       background: var(--dark);
       color: var(--text-d);
@@ -347,7 +294,6 @@
       position: relative;
       z-index: 1;
     }
-
     .ref-footer {
       text-align: center;
       font-size: .75rem;
@@ -358,14 +304,11 @@
       padding-top: 16px;
       border-top: 1px solid var(--line);
     }
-
-    /* â”€â”€ Page 2/3 sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-    .sb-cont { /* continuation sidebar on pages 2,3 */
+    .sb-cont {
       width: var(--sb-w);
       flex-shrink: 0;
       background: var(--dark);
       position: relative;
-      overflow: hidden;
     }
     .sb-cont::after {
       content: '';
@@ -374,7 +317,6 @@
       width: 3px; height: 100%;
       background: linear-gradient(to bottom, var(--rose) 40%, transparent);
     }
-    /* decorative pattern on continuation sidebar */
     .sb-cont-inner {
       padding: 28px 22px;
       height: 100%;
@@ -382,28 +324,20 @@
       flex-direction: column;
       gap: 22px;
     }
-
-
   </style>
 </head>
 <body>
 
-<!-- ===========================================
-     PAGE 1 " Header + Experience + Summary
-=============================================== -->
+<!-- PAGE 1 -->
 <div class="page" id="page1">
-
-  <!-- SIDEBAR -->
   <div class="sb">
     <div class="sb-arch">
       <div class="portrait-wrap">
         <img src="assets/portrait.png" alt="Astha Patel">
       </div>
     </div>
-
     <div class="sb-body">
 
-      <!-- Contact -->
       <div class="sb-section">
         <div class="sb-section-title">Contact</div>
         <ul class="contact-list">
@@ -430,7 +364,6 @@
         </ul>
       </div>
 
-      <!-- Core Competencies -->
       <div class="sb-section">
         <div class="sb-section-title">Competencies</div>
         <div class="skill-group">
@@ -461,28 +394,30 @@
         </div>
       </div>
 
-      <!-- Education & Background -->
       <div class="sb-section">
         <div class="sb-section-title">Background</div>
-        <div style="font-size:.78rem; font-weight:600; color:var(--text-d); margin-bottom:6px;">From</div>
-        <div style="font-size:.73rem; font-weight:300; color:var(--text-d2); line-height:1.6;">Khalilabad, Sant Kabir Nagar<br>Uttar Pradesh, India</div>
-        <div style="font-size:.78rem; font-weight:600; color:var(--text-d); margin-top:12px; margin-bottom:4px;">Age</div>
-        <div style="font-size:.73rem; font-weight:300; color:var(--text-d2);">19 years old</div>
-        <div style="font-size:.78rem; font-weight:600; color:var(--text-d); margin-top:12px; margin-bottom:4px;">Education</div>
-        <div style="font-size:.73rem; font-weight:300; color:var(--text-d2); line-height:1.6;">Higher Secondary · Khalilabad<br><span style="color:var(--rose-pale); font-size:.72rem; font-weight:400;">Shree Ram Public School</span><br><span style="color:var(--rose); font-size:.68rem;">Actively growing through experience</span></div>
+        <div style="font-size:.78rem;font-weight:600;color:var(--text-d);margin-bottom:6px;">From</div>
+        <div style="font-size:.73rem;font-weight:300;color:var(--text-d2);line-height:1.6;">Khalilabad, Sant Kabir Nagar<br>Uttar Pradesh, India</div>
+        <div style="font-size:.78rem;font-weight:600;color:var(--text-d);margin-top:12px;margin-bottom:4px;">Age</div>
+        <div style="font-size:.73rem;font-weight:300;color:var(--text-d2);">19 years old</div>
+        <div style="font-size:.78rem;font-weight:600;color:var(--text-d);margin-top:12px;margin-bottom:4px;">Education</div>
+        <div style="font-size:.73rem;font-weight:300;color:var(--text-d2);line-height:1.6;">
+          Higher Secondary<br>
+          <span style="color:var(--rose-pale);font-size:.72rem;font-weight:400;">Shree Ram Public School</span><br>
+          <span style="color:var(--rose);font-size:.68rem;">Actively growing through experience</span>
+        </div>
       </div>
 
     </div>
-  </div><!-- /sb -->
+  </div>
 
-  <!-- MAIN -->
   <div class="main">
     <div class="wm">A</div>
     <div class="main-header">
       <h1>Astha <span>Patel</span></h1>
       <div class="role-tag">Client Relations &amp; Experience Professional</div>
       <div class="summary-blurb">
-        A people-first professional who turns everyday interactions into lasting business relationships"with warmth, composure, and a quiet confidence that speaks for itself.
+        A people-first professional who turns everyday interactions into lasting business relationships, with warmth, composure, and a quiet confidence that speaks for itself.
       </div>
     </div>
     <div class="main-body">
@@ -490,7 +425,7 @@
       <div>
         <div class="sec-title">Professional Summary</div>
         <p class="summary-text">
-          Motivated and emotionally intelligent professional with hands-on experience in client-facing environments, front office operations, and high-stakes business interactions. Bilingual in English and Hindi, with a proven ability to adapt to new settings rapidly, de-escalate conflict with poise, and build lasting trust through consistent, genuine human connection. Raised within an active real estate enterprise, bringing an uncommon depth of business acuity for someone of her experience level.
+          Motivated and emotionally intelligent professional with hands-on experience in client-facing environments, front office operations, and high-stakes business interactions. Bilingual in English and Hindi, with a proven ability to adapt to new settings rapidly, de-escalate conflict with poise, and build lasting trust through consistent, genuine human connection. Raised within an active real estate enterprise, bringing an uncommon depth of business acuity for her level of experience.
         </p>
       </div>
 
@@ -500,14 +435,14 @@
         <div class="exp-block">
           <div class="exp-head">
             <div class="exp-role">Front Office &amp; Client Relations Executive</div>
-            <div class="exp-date">2023 " Present</div>
+            <div class="exp-date">2023 - Present</div>
           </div>
           <div class="exp-org">Authorised Hero MotoCorp Dealership</div>
           <ul class="exp-bullets">
             <li>Served as the primary point of contact for all walk-in customers, managing first impressions and ensuring a consistently professional, welcoming environment.</li>
-            <li>Resolved customer complaints and service escalations with calm authority, resulting in measurable improvements to customer satisfaction and repeat visits.</li>
-            <li>Coordinated cross-functionally with sales, service, and logistics teams to streamline daily operations and eliminate customer wait-time friction.</li>
-            <li>Handled inbound communication channels including calls, inquiries, and follow-up correspondence with precise attention to detail and timeliness.</li>
+            <li>Resolved customer complaints and service escalations with calm authority, contributing directly to higher client satisfaction and repeat visits.</li>
+            <li>Coordinated cross-functionally with sales, service, and logistics teams to streamline daily operations and reduce customer wait-time friction.</li>
+            <li>Handled all inbound communication channels including calls, inquiries, and follow-up correspondence with precise attention to detail and timeliness.</li>
           </ul>
           <div class="tag-row">
             <span>Customer Management</span>
@@ -520,12 +455,12 @@
         <div class="exp-block">
           <div class="exp-head">
             <div class="exp-role">Business Observer &amp; Client Relations Support</div>
-            <div class="exp-date">2019 " 2023</div>
+            <div class="exp-date">2019 - 2023</div>
           </div>
           <div class="exp-org">Family Real Estate Enterprise, Khalilabad</div>
           <ul class="exp-bullets">
             <li>Participated in client consultations and property negotiations, developing an intuitive understanding of buyer psychology and trust-building under financial pressure.</li>
-            <li>Observed the full lifecycle of business relationships"from initial inquiry through contract closure"learning how loyalty is earned through consistency, not transactions.</li>
+            <li>Observed the full lifecycle of business relationships, from initial inquiry through contract closure, learning how loyalty is earned through consistency, not transactions.</li>
             <li>Supported relationship management by tracking client follow-ups, maintaining communication logs, and assisting in correspondence preparation.</li>
           </ul>
           <div class="tag-row">
@@ -536,24 +471,17 @@
           </div>
         </div>
 
-      </div><!-- /experience section -->
-
-    </div><!-- /main-body -->
-  </div><!-- /main -->
-
-</div><!-- /page1 -->
+      </div>
+    </div>
+  </div>
+</div>
 
 
-<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-     PAGE 2 " Capabilities + What Sets Me Apart
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  -->
+<!-- PAGE 2 -->
 <div class="page" id="page2">
-
-  <!-- SIDEBAR CONTINUATION -->
   <div class="sb-cont">
     <div class="sb-cont-inner">
 
-      <!-- Capabilities Matrix -->
       <div class="sb-section">
         <div class="sb-section-title">Capabilities</div>
         <div class="cap-list">
@@ -592,21 +520,19 @@
         </div>
       </div>
 
-      <!-- Differentiators -->
       <div class="sb-section">
         <div class="sb-section-title">Key Strengths</div>
         <ul class="diff-list">
-          <li class="diff-item"><strong>Rapid Adaptability</strong>Settles into new environments fast"asks the right questions and contributes before others have finished onboarding.</li>
+          <li class="diff-item"><strong>Rapid Adaptability</strong>Settles into new environments fast, asks the right questions and contributes before others have finished onboarding.</li>
           <li class="diff-item"><strong>Unshakable Composure</strong>Remains calm and solution-oriented during difficult interactions, bringing stability to tense situations.</li>
           <li class="diff-item"><strong>Genuine Active Listening</strong>Hears what people are actually trying to say, even when they struggle to articulate it clearly.</li>
-          <li class="diff-item"><strong>Exceptional Brand Presence</strong>Consistently polished, self-aware, and composed"instils confidence in anyone she represents.</li>
+          <li class="diff-item"><strong>Exceptional Brand Presence</strong>Consistently polished, self-aware, and composed, instils confidence in anyone she represents.</li>
         </ul>
       </div>
 
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
     <div class="page-header-strip">
       <div class="name-mini">Astha <span>Patel</span></div>
@@ -619,27 +545,27 @@
         <div class="diff-grid">
           <div class="diff-card">
             <h4>Rapid Adaptability</h4>
-            <p>Whether it is a new industry, a new team, or an unfamiliar challenge, I settle in fast. I observe carefully, ask the right questions, and start contributing before most people have completed orientation. Change does not unsettle me"it energises me.</p>
+            <p>Whether it is a new industry, a new team, or an unfamiliar challenge, I settle in fast. I observe carefully, ask the right questions, and start contributing before most people have completed orientation. Change does not unsettle me, it energises me.</p>
           </div>
           <div class="diff-card">
             <h4>Unshakable Composure</h4>
-            <p>Difficult customers, unexpected problems, high-stakes conversations. I have handled all of them. I do not get flustered. I slow down, think clearly, and find a constructive path forward"bringing a stabilising presence that others gravitate toward.</p>
+            <p>Difficult customers, unexpected problems, high-stakes conversations. I have handled all of them. I do not get flustered. I slow down, think clearly, and find a constructive path forward, bringing a stabilising presence that others gravitate toward.</p>
           </div>
           <div class="diff-card">
             <h4>Profound Active Listening</h4>
-            <p>I practise the kind of listening where you actually hear what someone is trying to communicate"even when they are struggling to articulate it. This awareness allows me to address the root of problems rather than just their surface symptoms.</p>
+            <p>I practise the kind of listening where you actually hear what someone is trying to communicate, even when they are struggling to articulate it. This awareness allows me to address the root of problems rather than just their surface symptoms.</p>
           </div>
           <div class="diff-card">
             <h4>Outstanding Brand Representation</h4>
-            <p>Polished, self-aware, and consistently appropriate to every setting. When I represent an organisation, clients and stakeholders feel immediate confidence that I reflect the brand's highest standards"without being told twice.</p>
+            <p>Polished, self-aware, and consistently appropriate to every setting. When I represent an organisation, clients and stakeholders feel immediate confidence that I reflect the brand's highest standards without being told twice.</p>
           </div>
           <div class="diff-card">
             <h4>Relationship Over Transaction</h4>
-            <p>A customer who returns is not returning for the product. They are returning because of how they were made to feel. I understand this deeply and engineer every interaction to be personal, warm, and memorable"creating loyalty that outlasts promotions.</p>
+            <p>A customer who returns is not returning for the product. They are returning because of how they were made to feel. I engineer every interaction to be personal, warm, and memorable, creating loyalty that outlasts promotions.</p>
           </div>
           <div class="diff-card">
             <h4>Absolute Accountability</h4>
-            <p>If something is my responsibility, I own it completely. I follow through on every commitment, show up on time, and never manufacture excuses. Reliability is a quiet quality"but it is the one that matters most when stakes are high.</p>
+            <p>If something is my responsibility, I own it completely. I follow through on every commitment, show up on time, and never manufacture excuses. Reliability is the quality that matters most when stakes are high.</p>
           </div>
         </div>
       </div>
@@ -649,37 +575,32 @@
         <div class="values-row">
           <div class="val-item">
             <h4>Integrity</h4>
-            <p>Honesty is a default, not a tactic. I tell people what they need to hear"not what they want to hear"with tact and care, building an unshakeable foundation of trust over time.</p>
+            <p>Honesty is a default, not a tactic. I tell people what they need to hear, not what they want to hear, with tact and care, building an unshakeable foundation of trust over time.</p>
           </div>
           <div class="val-item">
             <h4>Excellence</h4>
-            <p>Self-imposed, not externally mandated. I would not feel right delivering anything less than my absolute best"regardless of whether anyone is watching or measuring.</p>
+            <p>Self-imposed, not externally mandated. I would not feel right delivering anything less than my absolute best, regardless of whether anyone is watching or measuring.</p>
           </div>
           <div class="val-item">
             <h4>Respect</h4>
-            <p>Senior executive or first-time visitor"every person receives the same level of care, attention, and genuine professional warmth. Status does not change the quality of my service.</p>
+            <p>Senior executive or first-time visitor, every person receives the same level of care, attention, and genuine professional warmth. Status does not change the quality of my service.</p>
           </div>
         </div>
       </div>
 
     </div>
   </div>
-</div><!-- /page2 -->
+</div>
 
 
-<!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
-     PAGE 3 " Business Exposure + Vision + Quote
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  -->
+<!-- PAGE 3 -->
 <div class="page" id="page3">
-
-  <!-- SIDEBAR CONTINUATION -->
   <div class="sb-cont">
     <div class="sb-cont-inner">
 
-      <!-- Languages -->
       <div class="sb-section">
         <div class="sb-section-title">Languages</div>
-        <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex;flex-direction:column;gap:10px;">
           <div>
             <div class="cap-title"><span>English</span><span style="color:var(--rose)">Fluent</span></div>
             <div class="cap-bg"><div class="cap-fill" style="width:90%"></div></div>
@@ -691,21 +612,19 @@
         </div>
       </div>
 
-      <!-- Business Highlights -->
       <div class="sb-section">
         <div class="sb-section-title">Business Exposure</div>
         <ul class="diff-list">
           <li class="diff-item"><strong>Client-Facing Environments</strong>Years of observing and navigating real client interactions across real estate and retail automotive sectors.</li>
-          <li class="diff-item"><strong>Professional Meeting Etiquette</strong>Comfortable in formal settings"knows when to speak, when to listen, and how to carry herself with composure.</li>
+          <li class="diff-item"><strong>Professional Meeting Etiquette</strong>Comfortable in formal settings, knows when to speak, when to listen, and how to carry herself with composure.</li>
           <li class="diff-item"><strong>Negotiation Awareness</strong>Witnessed skilled negotiators reach mutual wins; understands that good negotiation is about respect, not dominance.</li>
-          <li class="diff-item"><strong>Relationship-Driven Business</strong>Learned early that repeat business comes from relationships"not from marketing. When people trust you, they return and refer.</li>
+          <li class="diff-item"><strong>Relationship-Driven Business</strong>Learned early that repeat business comes from relationships, not marketing. When people trust you, they return and refer.</li>
         </ul>
       </div>
 
-      <!-- References -->
       <div class="sb-section" style="margin-top:auto;">
         <div class="sb-section-title">References</div>
-        <div style="font-size:.72rem; font-weight:300; color:var(--text-d2); line-height:1.55;">
+        <div style="font-size:.72rem;font-weight:300;color:var(--text-d2);line-height:1.55;">
           Available upon request from former supervisors and family business associates.
         </div>
       </div>
@@ -713,7 +632,6 @@
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="main">
     <div class="page-header-strip">
       <div class="name-mini">Astha <span>Patel</span></div>
@@ -724,10 +642,10 @@
       <div>
         <div class="sec-title">Business Exposure &amp; Real-World Learning</div>
         <p class="summary-text" style="margin-bottom:10px;">
-          My family operates a real estate enterprise in Khalilabad, and I have been embedded in that world since childhood"attending client meetings where people were making some of the most consequential financial decisions of their lives. I was not a bystander; I was present, listening, and absorbing.
+          My family operates a real estate enterprise in Khalilabad, and I have been embedded in that world since childhood, attending client meetings where people were making some of the most consequential financial decisions of their lives. I was not a bystander; I was present, listening, and absorbing.
         </p>
         <p class="summary-text">
-          What stayed with me was not how deals were structured"it was how <strong style="color:var(--rose)">trust</strong> was built. The clients who returned, who referred others, who called back years later were not the ones who got the best price. They were the ones who felt genuinely cared for. That insight shapes everything about how I show up professionally.
+          What stayed with me was not how deals were structured. It was how <strong style="color:var(--rose)">trust</strong> was built. The clients who returned, who referred others, who called back years later, were not the ones who got the best price. They were the ones who felt genuinely cared for. That insight shapes everything about how I show up professionally.
         </p>
       </div>
 
@@ -742,12 +660,12 @@
           <div class="vision-pillar">
             <div class="v-icon">NEXT</div>
             <h4>Next Chapter</h4>
-            <p>Grow into someone clients specifically ask for"a trusted professional whose understanding of their needs is so deep, they rely on her rather than simply return to her.</p>
+            <p>Grow into someone clients specifically ask for, a trusted professional whose understanding of their needs is so deep, they rely on her rather than simply return to her.</p>
           </div>
           <div class="vision-pillar">
             <div class="v-icon">FUTURE</div>
             <h4>Long-Term</h4>
-            <p>Lead from the front lines. Mentor others. Prove"through consistent action"that empathy and professionalism are not opposing forces. They are the same thing.</p>
+            <p>Lead from the front lines. Mentor others. Prove through consistent action that empathy and professionalism are not opposing forces. They are the same thing.</p>
           </div>
         </div>
       </div>
@@ -756,7 +674,7 @@
         <div class="sec-title">Professional Philosophy</div>
         <div class="quote-box">
           <p>
-            "Every organisation's reputation is built one conversation at a time. Every phone call, every handshake, every moment when a customer decides whether they trust you"those are the moments where real brand loyalty is won or lost. I take those moments seriously because I know I am not just representing myself. I am representing the people who trusted me to be there."
+            "Every organisation's reputation is built one conversation at a time. Every phone call, every handshake, every moment when a customer decides whether they trust you, those are the moments where real brand loyalty is won or lost. I take those moments seriously because I know I am not just representing myself. I am representing the people who trusted me to be there."
           </p>
         </div>
       </div>
@@ -767,7 +685,7 @@
 
     </div>
   </div>
-</div><!-- /page3 -->
+</div>
 
 </body>
 </html>
