@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,10 +34,10 @@
       gap: 48px;
     }
 
-    /* ── A4 page shell ─────────────────────────────────── */
+    /* â”€â”€ A4 page shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .page {
       width:  210mm;
-      min-height: 297mm;      /* never clips — content expands freely */
+      min-height: 297mm;      /* never clips â€” content expands freely */
       background: var(--white);
       box-shadow: 0 20px 60px rgba(0,0,0,.7);
       display: flex;
@@ -54,7 +54,7 @@
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     }
 
-    /* ── LEFT SIDEBAR ─────────────────────────────────── */
+    /* â”€â”€ LEFT SIDEBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .sb {
       width: var(--sb-w);
       flex-shrink: 0;
@@ -64,7 +64,7 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      /* no overflow:hidden — sidebar stretches with content */
+      /* no overflow:hidden â€” sidebar stretches with content */
     }
     /* accent strip */
     .sb::after {
@@ -153,10 +153,10 @@
     /* Differentiators list */
     .diff-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .diff-item { position: relative; padding-left: 14px; font-size: .73rem; font-weight: 300; line-height: 1.5; color: var(--text-d2); }
-    .diff-item::before { content: '✦'; position: absolute; left: 0; top: 2px; font-size: .5rem; color: var(--rose); }
+    .diff-item::before { content: 'âœ¦'; position: absolute; left: 0; top: 2px; font-size: .5rem; color: var(--rose); }
     .diff-item strong { color: var(--text-d); font-weight: 600; display: block; font-size: .73rem; }
 
-    /* ── MAIN CONTENT ──────────────────────────────────── */
+    /* â”€â”€ MAIN CONTENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .main {
       flex: 1;
       padding: 0;
@@ -208,11 +208,12 @@
       margin-bottom: 14px;
     }
     .main-header .summary-blurb {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: .92rem;
-      line-height: 1.65;
-      color: rgba(255,255,255,.7);
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: .88rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,.75);
       border-left: 2px solid var(--rose);
       padding-left: 14px;
     }
@@ -285,7 +286,7 @@
     .exp-org { font-family: 'Playfair Display', serif; font-style: italic; font-size: .85rem; color: var(--gray); margin-bottom: 9px; }
     .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
     .exp-bullets li { font-size: .82rem; line-height: 1.6; color: #444; padding-left: 16px; position: relative; }
-    .exp-bullets li::before { content: '▸'; position: absolute; left: 0; top: 0; color: var(--rose); font-size: .7rem; }
+    .exp-bullets li::before { content: 'â–¸'; position: absolute; left: 0; top: 0; color: var(--rose); font-size: .7rem; }
 
     /* Tags row */
     .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
@@ -311,7 +312,7 @@
     .values-row { display: flex; gap: 20px; }
     .val-item { flex: 1; }
     .val-item h4 { font-size: .85rem; font-weight: 600; color: var(--primary); margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
-    .val-item h4::before { content: '✦'; color: var(--rose); font-size: .6rem; }
+    .val-item h4::before { content: 'âœ¦'; color: var(--rose); font-size: .6rem; }
     .val-item p { font-size: .78rem; line-height: 1.6; color: var(--gray); }
 
     /* Vision */
@@ -347,19 +348,18 @@
       z-index: 1;
     }
 
-    /* References footer */
     .ref-footer {
       text-align: center;
-      font-size: .72rem;
-      color: #999;
-      letter-spacing: .1em;
+      font-size: .75rem;
+      color: var(--rose);
+      letter-spacing: .18em;
       text-transform: uppercase;
       margin-top: auto;
       padding-top: 16px;
       border-top: 1px solid var(--line);
     }
 
-    /* ── Page 2/3 sidebar ─────────────────────────────── */
+    /* â”€â”€ Page 2/3 sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
     .sb-cont { /* continuation sidebar on pages 2,3 */
       width: var(--sb-w);
       flex-shrink: 0;
@@ -388,9 +388,9 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     PAGE 1 — Header + Experience + Summary
-═══════════════════════════════════════════════ -->
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     PAGE 1 â€” Header + Experience + Summary
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 <div class="page" id="page1">
 
   <!-- SIDEBAR -->
@@ -469,7 +469,7 @@
         <div style="font-size:.78rem; font-weight:600; color:var(--text-d); margin-top:12px; margin-bottom:4px;">Age</div>
         <div style="font-size:.73rem; font-weight:300; color:var(--text-d2);">19 years old</div>
         <div style="font-size:.78rem; font-weight:600; color:var(--text-d); margin-top:12px; margin-bottom:4px;">Education</div>
-        <div style="font-size:.73rem; font-weight:300; color:var(--text-d2); line-height:1.6;">Higher Secondary · Khalilabad<br><span style="color:var(--rose); font-size:.68rem;">Actively growing through experience</span></div>
+        <div style="font-size:.73rem; font-weight:300; color:var(--text-d2); line-height:1.6;">Higher Secondary · Khalilabad<br><span style="color:var(--rose-pale); font-size:.72rem; font-weight:400;">Shree Ram Public School</span><br><span style="color:var(--rose); font-size:.68rem;">Actively growing through experience</span></div>
       </div>
 
     </div>
@@ -482,7 +482,7 @@
       <h1>Astha <span>Patel</span></h1>
       <div class="role-tag">Client Relations &amp; Experience Professional</div>
       <div class="summary-blurb">
-        A people-first professional who turns everyday interactions into lasting business relationships—with warmth, composure, and a quiet confidence that speaks for itself.
+        A people-first professional who turns everyday interactions into lasting business relationshipsâ€”with warmth, composure, and a quiet confidence that speaks for itself.
       </div>
     </div>
     <div class="main-body">
@@ -500,7 +500,7 @@
         <div class="exp-block">
           <div class="exp-head">
             <div class="exp-role">Front Office &amp; Client Relations Executive</div>
-            <div class="exp-date">2023 – Present</div>
+            <div class="exp-date">2023 â€“ Present</div>
           </div>
           <div class="exp-org">Authorised Hero MotoCorp Dealership</div>
           <ul class="exp-bullets">
@@ -520,12 +520,12 @@
         <div class="exp-block">
           <div class="exp-head">
             <div class="exp-role">Business Observer &amp; Client Relations Support</div>
-            <div class="exp-date">2019 – 2023</div>
+            <div class="exp-date">2019 â€“ 2023</div>
           </div>
           <div class="exp-org">Family Real Estate Enterprise, Khalilabad</div>
           <ul class="exp-bullets">
             <li>Participated in client consultations and property negotiations, developing an intuitive understanding of buyer psychology and trust-building under financial pressure.</li>
-            <li>Observed the full lifecycle of business relationships—from initial inquiry through contract closure—learning how loyalty is earned through consistency, not transactions.</li>
+            <li>Observed the full lifecycle of business relationshipsâ€”from initial inquiry through contract closureâ€”learning how loyalty is earned through consistency, not transactions.</li>
             <li>Supported relationship management by tracking client follow-ups, maintaining communication logs, and assisting in correspondence preparation.</li>
           </ul>
           <div class="tag-row">
@@ -544,9 +544,9 @@
 </div><!-- /page1 -->
 
 
-<!-- ═══════════════════════════════════════════
-     PAGE 2 — Capabilities + What Sets Me Apart
-═══════════════════════════════════════════════ -->
+<!-- â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• 
+     PAGE 2 â€” Capabilities + What Sets Me Apart
+â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â•  -->
 <div class="page" id="page2">
 
   <!-- SIDEBAR CONTINUATION -->
@@ -596,10 +596,10 @@
       <div class="sb-section">
         <div class="sb-section-title">Key Strengths</div>
         <ul class="diff-list">
-          <li class="diff-item"><strong>Rapid Adaptability</strong>Settles into new environments fast—asks the right questions and contributes before others have finished onboarding.</li>
+          <li class="diff-item"><strong>Rapid Adaptability</strong>Settles into new environments fastâ€”asks the right questions and contributes before others have finished onboarding.</li>
           <li class="diff-item"><strong>Unshakable Composure</strong>Remains calm and solution-oriented during difficult interactions, bringing stability to tense situations.</li>
           <li class="diff-item"><strong>Genuine Active Listening</strong>Hears what people are actually trying to say, even when they struggle to articulate it clearly.</li>
-          <li class="diff-item"><strong>Exceptional Brand Presence</strong>Consistently polished, self-aware, and composed—instils confidence in anyone she represents.</li>
+          <li class="diff-item"><strong>Exceptional Brand Presence</strong>Consistently polished, self-aware, and composedâ€”instils confidence in anyone she represents.</li>
         </ul>
       </div>
 
@@ -619,27 +619,27 @@
         <div class="diff-grid">
           <div class="diff-card">
             <h4>Rapid Adaptability</h4>
-            <p>Whether it is a new industry, a new team, or an unfamiliar challenge, I settle in fast. I observe carefully, ask the right questions, and start contributing before most people have completed orientation. Change does not unsettle me—it energises me.</p>
+            <p>Whether it is a new industry, a new team, or an unfamiliar challenge, I settle in fast. I observe carefully, ask the right questions, and start contributing before most people have completed orientation. Change does not unsettle meâ€”it energises me.</p>
           </div>
           <div class="diff-card">
             <h4>Unshakable Composure</h4>
-            <p>Difficult customers, unexpected problems, high-stakes conversations. I have handled all of them. I do not get flustered. I slow down, think clearly, and find a constructive path forward—bringing a stabilising presence that others gravitate toward.</p>
+            <p>Difficult customers, unexpected problems, high-stakes conversations. I have handled all of them. I do not get flustered. I slow down, think clearly, and find a constructive path forwardâ€”bringing a stabilising presence that others gravitate toward.</p>
           </div>
           <div class="diff-card">
             <h4>Profound Active Listening</h4>
-            <p>I practise the kind of listening where you actually hear what someone is trying to communicate—even when they are struggling to articulate it. This awareness allows me to address the root of problems rather than just their surface symptoms.</p>
+            <p>I practise the kind of listening where you actually hear what someone is trying to communicateâ€”even when they are struggling to articulate it. This awareness allows me to address the root of problems rather than just their surface symptoms.</p>
           </div>
           <div class="diff-card">
             <h4>Outstanding Brand Representation</h4>
-            <p>Polished, self-aware, and consistently appropriate to every setting. When I represent an organisation, clients and stakeholders feel immediate confidence that I reflect the brand's highest standards—without being told twice.</p>
+            <p>Polished, self-aware, and consistently appropriate to every setting. When I represent an organisation, clients and stakeholders feel immediate confidence that I reflect the brand's highest standardsâ€”without being told twice.</p>
           </div>
           <div class="diff-card">
             <h4>Relationship Over Transaction</h4>
-            <p>A customer who returns is not returning for the product. They are returning because of how they were made to feel. I understand this deeply and engineer every interaction to be personal, warm, and memorable—creating loyalty that outlasts promotions.</p>
+            <p>A customer who returns is not returning for the product. They are returning because of how they were made to feel. I understand this deeply and engineer every interaction to be personal, warm, and memorableâ€”creating loyalty that outlasts promotions.</p>
           </div>
           <div class="diff-card">
             <h4>Absolute Accountability</h4>
-            <p>If something is my responsibility, I own it completely. I follow through on every commitment, show up on time, and never manufacture excuses. Reliability is a quiet quality—but it is the one that matters most when stakes are high.</p>
+            <p>If something is my responsibility, I own it completely. I follow through on every commitment, show up on time, and never manufacture excuses. Reliability is a quiet qualityâ€”but it is the one that matters most when stakes are high.</p>
           </div>
         </div>
       </div>
@@ -649,15 +649,15 @@
         <div class="values-row">
           <div class="val-item">
             <h4>Integrity</h4>
-            <p>Honesty is a default, not a tactic. I tell people what they need to hear—not what they want to hear—with tact and care, building an unshakeable foundation of trust over time.</p>
+            <p>Honesty is a default, not a tactic. I tell people what they need to hearâ€”not what they want to hearâ€”with tact and care, building an unshakeable foundation of trust over time.</p>
           </div>
           <div class="val-item">
             <h4>Excellence</h4>
-            <p>Self-imposed, not externally mandated. I would not feel right delivering anything less than my absolute best—regardless of whether anyone is watching or measuring.</p>
+            <p>Self-imposed, not externally mandated. I would not feel right delivering anything less than my absolute bestâ€”regardless of whether anyone is watching or measuring.</p>
           </div>
           <div class="val-item">
             <h4>Respect</h4>
-            <p>Senior executive or first-time visitor—every person receives the same level of care, attention, and genuine professional warmth. Status does not change the quality of my service.</p>
+            <p>Senior executive or first-time visitorâ€”every person receives the same level of care, attention, and genuine professional warmth. Status does not change the quality of my service.</p>
           </div>
         </div>
       </div>
@@ -667,9 +667,9 @@
 </div><!-- /page2 -->
 
 
-<!-- ═══════════════════════════════════════════
-     PAGE 3 — Business Exposure + Vision + Quote
-═══════════════════════════════════════════════ -->
+<!-- â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• 
+     PAGE 3 â€” Business Exposure + Vision + Quote
+â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â• â•  -->
 <div class="page" id="page3">
 
   <!-- SIDEBAR CONTINUATION -->
@@ -696,9 +696,9 @@
         <div class="sb-section-title">Business Exposure</div>
         <ul class="diff-list">
           <li class="diff-item"><strong>Client-Facing Environments</strong>Years of observing and navigating real client interactions across real estate and retail automotive sectors.</li>
-          <li class="diff-item"><strong>Professional Meeting Etiquette</strong>Comfortable in formal settings—knows when to speak, when to listen, and how to carry herself with composure.</li>
+          <li class="diff-item"><strong>Professional Meeting Etiquette</strong>Comfortable in formal settingsâ€”knows when to speak, when to listen, and how to carry herself with composure.</li>
           <li class="diff-item"><strong>Negotiation Awareness</strong>Witnessed skilled negotiators reach mutual wins; understands that good negotiation is about respect, not dominance.</li>
-          <li class="diff-item"><strong>Relationship-Driven Business</strong>Learned early that repeat business comes from relationships—not from marketing. When people trust you, they return and refer.</li>
+          <li class="diff-item"><strong>Relationship-Driven Business</strong>Learned early that repeat business comes from relationshipsâ€”not from marketing. When people trust you, they return and refer.</li>
         </ul>
       </div>
 
@@ -724,10 +724,10 @@
       <div>
         <div class="sec-title">Business Exposure &amp; Real-World Learning</div>
         <p class="summary-text" style="margin-bottom:10px;">
-          My family operates a real estate enterprise in Khalilabad, and I have been embedded in that world since childhood—attending client meetings where people were making some of the most consequential financial decisions of their lives. I was not a bystander; I was present, listening, and absorbing.
+          My family operates a real estate enterprise in Khalilabad, and I have been embedded in that world since childhoodâ€”attending client meetings where people were making some of the most consequential financial decisions of their lives. I was not a bystander; I was present, listening, and absorbing.
         </p>
         <p class="summary-text">
-          What stayed with me was not how deals were structured—it was how <strong style="color:var(--rose)">trust</strong> was built. The clients who returned, who referred others, who called back years later were not the ones who got the best price. They were the ones who felt genuinely cared for. That insight shapes everything about how I show up professionally.
+          What stayed with me was not how deals were structuredâ€”it was how <strong style="color:var(--rose)">trust</strong> was built. The clients who returned, who referred others, who called back years later were not the ones who got the best price. They were the ones who felt genuinely cared for. That insight shapes everything about how I show up professionally.
         </p>
       </div>
 
@@ -742,12 +742,12 @@
           <div class="vision-pillar">
             <div class="v-icon">NEXT</div>
             <h4>Next Chapter</h4>
-            <p>Grow into someone clients specifically ask for—a trusted professional whose understanding of their needs is so deep, they rely on her rather than simply return to her.</p>
+            <p>Grow into someone clients specifically ask forâ€”a trusted professional whose understanding of their needs is so deep, they rely on her rather than simply return to her.</p>
           </div>
           <div class="vision-pillar">
             <div class="v-icon">FUTURE</div>
             <h4>Long-Term</h4>
-            <p>Lead from the front lines. Mentor others. Prove—through consistent action—that empathy and professionalism are not opposing forces. They are the same thing.</p>
+            <p>Lead from the front lines. Mentor others. Proveâ€”through consistent actionâ€”that empathy and professionalism are not opposing forces. They are the same thing.</p>
           </div>
         </div>
       </div>
@@ -756,13 +756,13 @@
         <div class="sec-title">Professional Philosophy</div>
         <div class="quote-box">
           <p>
-            "Every organisation's reputation is built one conversation at a time. Every phone call, every handshake, every moment when a customer decides whether they trust you—those are the moments where real brand loyalty is won or lost. I take those moments seriously because I know I am not just representing myself. I am representing the people who trusted me to be there."
+            "Every organisation's reputation is built one conversation at a time. Every phone call, every handshake, every moment when a customer decides whether they trust youâ€”those are the moments where real brand loyalty is won or lost. I take those moments seriously because I know I am not just representing myself. I am representing the people who trusted me to be there."
           </p>
         </div>
       </div>
 
       <div class="ref-footer">
-        References Available Upon Request &nbsp;·&nbsp; portfolio-asthapatel.vercel.app
+        &middot;&ensp;References Available Upon Request&ensp;&middot;
       </div>
 
     </div>
