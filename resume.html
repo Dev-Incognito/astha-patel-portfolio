@@ -4,38 +4,49 @@
   <meta charset="UTF-8">
   <title>Astha Patel - Professional Resume</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
     
     :root {
-      --primary: #2b2b2b;
+      --primary: #1a1a2e;
       --secondary: #C2727E; /* Soft burgundy / rose */
+      --secondary-light: #e8ccd1;
       --bg-dark: #121016; /* Deep charcoal */
       --text-dark: #e4e2ed;
       --bg-light: #ffffff;
       --text-light: #333333;
       --accent: #d88995;
+      --gray: #666666;
+      --light-gray: #f4f4f4;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #333;
+      background-color: #222;
       color: var(--text-light);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       padding: 40px;
+      gap: 40px;
     }
 
+    /* Fixed A4 Page Setup */
     .page {
       width: 210mm;
-      min-height: 297mm;
+      height: 297mm;
       background: var(--bg-light);
       box-shadow: 0 15px 40px rgba(0,0,0,0.6);
       position: relative;
       overflow: hidden;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
     }
 
     @page {
@@ -44,415 +55,450 @@
     }
 
     @media print {
-      body { background-color: white; padding: 0; }
-      .page { box-shadow: none; width: 100%; min-height: 100vh; }
+      body { background-color: white; padding: 0; display: block; }
+      .page { box-shadow: none; margin: 0; page-break-after: always; }
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
     }
 
-    /* Left Sidebar */
-    .sidebar {
-      width: 36%;
+    /* Top Header (Page 1) */
+    .resume-header {
       background-color: var(--bg-dark);
       color: var(--text-dark);
-      padding: 45px 30px;
+      padding: 45px 50px;
       display: flex;
-      flex-direction: column;
-      gap: 35px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .sidebar::before {
-      content: "";
-      position: absolute;
-      top: 0; right: 0; bottom: 0; width: 4px;
-      background: linear-gradient(to bottom, var(--secondary), transparent);
-    }
-
-    /* Image Placeholder */
-    .image-placeholder {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
-      display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      text-align: center;
-      padding: 20px;
       position: relative;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      border-bottom: 5px solid var(--secondary);
     }
-    .image-placeholder::after {
-      content: "Insert Image";
-      font-weight: 500;
-    }
-    .image-placeholder::before {
+    .resume-header::after {
       content: "";
       position: absolute;
-      inset: 4px;
-      border: 1px dashed rgba(255,255,255,0.2);
-      border-radius: 8px;
-    }
-
-    /* Section Headings in Sidebar */
-    .sidebar h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.15rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      padding-bottom: 8px;
-      margin-bottom: 18px;
-      color: var(--accent);
-    }
-
-    /* Contact Details */
-    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 14px; font-size: 0.8rem; font-weight: 300; letter-spacing: 0.5px; }
-    .contact-item { display: flex; align-items: center; gap: 12px; }
-    .contact-icon { width: 16px; height: 16px; fill: var(--accent); flex-shrink: 0; }
-
-    /* Differentiators (Sidebar) */
-    .diff-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .diff-item { font-size: 0.8rem; line-height: 1.5; font-weight: 300; position: relative; padding-left: 18px; }
-    .diff-item::before {
-      content: "✦";
-      position: absolute;
-      left: 0;
-      top: 1px;
-      color: var(--accent);
-      font-size: 0.65rem;
-    }
-    .diff-item strong { color: var(--text-dark); font-weight: 600; display: block; margin-bottom: 2px; }
-
-    /* Capabilities Bars */
-    .cap-list { display: flex; flex-direction: column; gap: 14px; }
-    .cap-item {}
-    .cap-title { font-size: 0.75rem; font-weight: 500; margin-bottom: 5px; display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.9); }
-    .cap-bar-bg { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
-    .cap-bar-fill { height: 100%; background: var(--accent); }
-
-    /* Right Main Content */
-    .main {
-      width: 64%;
-      padding: 50px 45px;
-      display: flex;
-      flex-direction: column;
-      gap: 35px;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Watermark */
-    .watermark {
-      position: absolute;
-      bottom: -60px;
-      right: -30px;
-      font-family: 'Cinzel', serif;
-      font-size: 32rem;
-      font-weight: 700;
-      color: rgba(194, 114, 126, 0.035);
-      line-height: 1;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: linear-gradient(135deg, rgba(194, 114, 126, 0.1), transparent);
       pointer-events: none;
-      z-index: -1;
     }
 
-    /* Header in Main */
-    .header { position: relative; }
-    .header h1 {
+    .header-content {
+      width: 70%;
+    }
+
+    .header-content h1 {
       font-family: 'Cinzel', serif;
-      font-size: 4.2rem;
+      font-size: 3.8rem;
       font-weight: 700;
-      color: var(--primary);
+      color: var(--bg-light);
       line-height: 1;
       margin-bottom: 8px;
       letter-spacing: 2px;
     }
-    .header h1 span { color: var(--secondary); }
-    .tagline {
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: #777;
-      margin-bottom: 20px;
-    }
-    .statement {
+    .header-content h1 span { color: var(--secondary); }
+    .header-content .tagline {
       font-size: 0.95rem;
-      line-height: 1.7;
-      color: #444;
-      font-weight: 400;
-      font-style: italic;
-      border-left: 3px solid var(--secondary);
-      padding-left: 20px;
-      background: linear-gradient(to right, rgba(194, 114, 126, 0.05), transparent);
-      padding-top: 10px;
-      padding-bottom: 10px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--secondary-light);
+      margin-bottom: 15px;
     }
 
-    /* Main Sections */
+    .contact-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px 25px;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: #ccc;
+    }
+    .contact-item { display: flex; align-items: center; gap: 8px; }
+    .contact-icon { width: 14px; height: 14px; fill: var(--secondary); flex-shrink: 0; }
+
+    .header-image {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 2px solid var(--secondary);
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 20px rgba(194, 114, 126, 0.2);
+    }
+    .header-image::before {
+      content: "Insert Image";
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Page Body */
+    .page-body {
+      display: flex;
+      flex: 1;
+      padding: 40px 50px;
+      gap: 40px;
+      position: relative;
+    }
+    
+    .watermark {
+      position: absolute;
+      bottom: -40px;
+      right: -20px;
+      font-family: 'Cinzel', serif;
+      font-size: 28rem;
+      font-weight: 700;
+      color: rgba(194, 114, 126, 0.04);
+      line-height: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Layout Columns */
+    .col-main { flex: 2; display: flex; flex-direction: column; gap: 35px; z-index: 1; }
+    .col-side { flex: 1; display: flex; flex-direction: column; gap: 35px; z-index: 1; border-left: 1px solid #eee; padding-left: 35px; }
+
+    /* Section Styling */
     .section-title {
       font-family: 'Cinzel', serif;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--primary);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       position: relative;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       display: inline-block;
     }
     .section-title::after {
       content: "";
       position: absolute;
-      width: 50px;
+      width: 40px;
       height: 2px;
       background: var(--secondary);
       bottom: -6px;
       left: 0;
     }
 
-    /* Experience / Strengths Timeline */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-      position: relative;
-    }
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 6px;
-      top: 5px;
-      bottom: 0;
-      width: 1px;
-      background: #e0e0e0;
-    }
-    .timeline-item {
-      position: relative;
-      padding-left: 30px;
-    }
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: 1.5px;
-      top: 5px;
-      width: 10px;
-      height: 10px;
-      background: var(--bg-light);
-      border: 2px solid var(--secondary);
-      border-radius: 50%;
-      box-shadow: 0 0 0 3px rgba(194, 114, 126, 0.1);
-    }
-    .timeline-role { font-size: 1.05rem; font-weight: 600; color: var(--primary); margin-bottom: 3px; }
-    .timeline-company { font-size: 0.75rem; font-weight: 600; color: var(--secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; }
-    .timeline-desc { font-size: 0.85rem; line-height: 1.65; color: #555; }
-    
-    .skills-badges {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .skills-badges span {
-      font-size: 0.65rem;
-      background: #f4f4f4;
-      color: #555;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border: 1px solid #e8e8e8;
+    /* Summary */
+    .summary-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      text-align: justify;
     }
 
-    /* Values Grid */
-    .values-grid {
+    /* Experience */
+    .exp-item { margin-bottom: 25px; }
+    .exp-item:last-child { margin-bottom: 0; }
+    .exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+    .exp-role { font-size: 1.05rem; font-weight: 600; color: var(--primary); }
+    .exp-date { font-size: 0.8rem; font-weight: 500; color: var(--secondary); text-transform: uppercase; letter-spacing: 1px; }
+    .exp-company { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic; color: var(--gray); margin-bottom: 10px; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .exp-bullets li { font-size: 0.85rem; line-height: 1.6; color: #444; position: relative; padding-left: 15px; }
+    .exp-bullets li::before {
+      content: "■";
+      position: absolute;
+      left: 0;
+      top: 0px;
+      color: var(--secondary);
+      font-size: 0.5rem;
+    }
+
+    /* Sidebar Skills */
+    .skill-group { margin-bottom: 20px; }
+    .skill-group h4 { font-size: 0.9rem; font-weight: 600; color: var(--primary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tags span {
+      font-size: 0.75rem;
+      background: var(--light-gray);
+      color: var(--text-light);
+      padding: 5px 12px;
+      border-radius: 4px;
+      border-left: 2px solid var(--secondary);
+      font-weight: 500;
+    }
+
+    /* Capabilities Progress */
+    .cap-list { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+    .cap-item {}
+    .cap-title { font-size: 0.75rem; font-weight: 600; margin-bottom: 5px; display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); }
+    .cap-bar-bg { width: 100%; height: 4px; background: #eaeaea; border-radius: 2px; overflow: hidden; }
+    .cap-bar-fill { height: 100%; background: var(--secondary); }
+
+    /* Differentiators Grid (Page 2) */
+    .diff-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 25px;
     }
-    .value-item h4 {
-      font-size: 0.9rem;
-      font-weight: 600;
+    .diff-card {
+      background: var(--light-gray);
+      padding: 20px;
+      border-radius: 6px;
+      border-top: 3px solid var(--secondary);
+    }
+    .diff-card h4 {
+      font-size: 0.95rem;
       color: var(--primary);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      margin-bottom: 8px;
     }
-    .value-item h4::before {
-      content: "✦";
-      color: var(--secondary);
-      font-size: 0.7rem;
-    }
-    .value-item p {
-      font-size: 0.8rem;
+    .diff-card p {
+      font-size: 0.85rem;
       line-height: 1.6;
-      color: #666;
+      color: #555;
     }
 
-    /* Exposure / Narratives */
-    .narrative {
-      background: #fafafa;
-      border: 1px solid #eee;
-      padding: 18px 20px;
+    /* Quote / Philosophy */
+    .philosophy-box {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      padding: 30px;
       border-radius: 8px;
+      position: relative;
+      margin-top: 15px;
     }
-    .narrative p {
-      font-size: 0.85rem;
-      line-height: 1.7;
-      color: #444;
-      margin-bottom: 12px;
+    .philosophy-box::before {
+      content: '"';
+      position: absolute;
+      top: 10px; left: 15px;
+      font-family: 'Cinzel', serif;
+      font-size: 4rem;
+      color: rgba(194, 114, 126, 0.3);
+      line-height: 1;
     }
-    .narrative p:last-child { margin-bottom: 0; }
-    .narrative strong { color: var(--secondary); font-weight: 600; }
+    .philosophy-box p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      line-height: 1.8;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Education */
+    .edu-item { margin-bottom: 15px; }
+    .edu-degree { font-size: 0.95rem; font-weight: 600; color: var(--primary); }
+    .edu-school { font-size: 0.85rem; color: var(--gray); margin-top: 3px; }
 
   </style>
 </head>
 <body>
-  <div class="page" id="resume">
-    <div class="sidebar">
-      <div class="image-placeholder"></div>
-      
-      <div class="sidebar-section">
-        <h2>Contact</h2>
-        <ul class="contact-list">
-          <li class="contact-item">
+
+  <!-- ================= PAGE 1 ================= -->
+  <div class="page" id="page-1">
+    
+    <!-- Header -->
+    <div class="resume-header">
+      <div class="header-content">
+        <h1>Astha <span>Patel</span></h1>
+        <div class="tagline">Client Relations & Experience Professional</div>
+        <div class="contact-bar">
+          <div class="contact-item">
             <svg class="contact-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             astha.patel@email.com
-          </li>
-          <li class="contact-item">
+          </div>
+          <div class="contact-item">
             <svg class="contact-icon" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
             +91 XXXXX XXXXX
-          </li>
-          <li class="contact-item">
+          </div>
+          <div class="contact-item">
             <svg class="contact-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             Khalilabad, UP
-          </li>
-          <li class="contact-item">
-            <svg class="contact-icon" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
-            English & Hindi
-          </li>
-        </ul>
-      </div>
-
-      <div class="sidebar-section">
-        <h2>What Sets Me Apart</h2>
-        <ul class="diff-list">
-          <li class="diff-item"><strong>I Adapt Quickly</strong> I ask the right questions, observe carefully, and start contributing immediately.</li>
-          <li class="diff-item"><strong>I Stay Calm</strong> Difficult customers or unexpected problems, I do not get flustered. I find a way forward.</li>
-          <li class="diff-item"><strong>I Really Listen</strong> I hear what someone is trying to tell you, even when they are struggling to say it.</li>
-          <li class="diff-item"><strong>I Build Relationships</strong> I focus on making every interaction feel personal, not procedural.</li>
-        </ul>
-      </div>
-
-      <div class="sidebar-section">
-        <h2>Capabilities</h2>
-        <div class="cap-list">
-          <div class="cap-item">
-            <div class="cap-title"><span>Interpersonal Comm.</span> <span>95%</span></div>
-            <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 95%"></div></div>
           </div>
-          <div class="cap-item">
-            <div class="cap-title"><span>Customer Service</span> <span>94%</span></div>
-            <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 94%"></div></div>
-          </div>
-          <div class="cap-item">
-            <div class="cap-title"><span>Adaptability</span> <span>93%</span></div>
-            <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 93%"></div></div>
-          </div>
-          <div class="cap-item">
-            <div class="cap-title"><span>Emotional Intelligence</span> <span>92%</span></div>
-            <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 92%"></div></div>
-          </div>
-          <div class="cap-item">
-            <div class="cap-title"><span>Professional Presentation</span> <span>90%</span></div>
-            <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 90%"></div></div>
+          <div class="contact-item">
+            <svg class="contact-icon" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+            linkedin.com/in/asthapatel
           </div>
         </div>
       </div>
-      
+      <div class="header-image"></div>
     </div>
 
-    <div class="main">
+    <!-- Body -->
+    <div class="page-body">
       <div class="watermark">A</div>
       
-      <div class="header">
-        <h1>Astha <span>Patel</span></h1>
-        <div class="tagline">People ✦ Trust ✦ Excellence</div>
-        <div class="statement">
-          "A people-first professional who turns everyday interactions into lasting relationships, with warmth, composure, and a quiet confidence that speaks for itself."
+      <!-- Left Main Column -->
+      <div class="col-main">
+        
+        <div class="section">
+          <h2 class="section-title">Professional Summary</h2>
+          <p class="summary-text">
+            A people-first professional dedicated to turning everyday interactions into lasting business relationships. Bilingual in English and Hindi, bringing exceptional emotional intelligence, adaptability, and composure under pressure. Demonstrated ability to thrive in client-facing environments, navigate complex interpersonal dynamics, and consistently uphold brand integrity and operational excellence.
+          </p>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">Professional Experience</h2>
+          
+          <div class="exp-item">
+            <div class="exp-header">
+              <div class="exp-role">Front Office & Client Relations</div>
+              <div class="exp-date">2023 – Present</div>
+            </div>
+            <div class="exp-company">Authorized Hero Dealership</div>
+            <ul class="exp-bullets">
+              <li>Directed front office operations, serving as the primary point of contact for hundreds of daily visitors and ensuring a welcoming, professional atmosphere.</li>
+              <li>Resolved complex customer concerns with patience and empathy, directly contributing to higher client satisfaction and brand loyalty.</li>
+              <li>Coordinated seamlessly with the sales and service teams to streamline customer flow and optimize the overall dealership experience.</li>
+              <li>Managed professional correspondence, inbound communications, and logistical tracking with rigorous attention to detail.</li>
+            </ul>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <div class="exp-role">Business Operations Observer</div>
+              <div class="exp-date">2020 – 2023</div>
+            </div>
+            <div class="exp-company">Family Real Estate Enterprise</div>
+            <ul class="exp-bullets">
+              <li>Attended high-stakes client meetings, gaining firsthand exposure to complex negotiations, buyer-seller dynamics, and strategic decision-making.</li>
+              <li>Developed a deep understanding of trust-building techniques and the critical importance of long-term client retention in competitive markets.</li>
+              <li>Assisted in maintaining client relationships and tracking follow-ups, learning the foundational elements of reliability and professional etiquette.</li>
+              <li>Observed and adapted to high-pressure environments, learning how to remain composed and clear-headed during critical financial discussions.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Sidebar Column -->
+      <div class="col-side">
+        
+        <div class="section">
+          <h2 class="section-title">Core Competencies</h2>
+          
+          <div class="skill-group">
+            <h4>Client Engagement</h4>
+            <div class="skill-tags">
+              <span>Relationship Building</span>
+              <span>Rapport Cultivation</span>
+              <span>First Impressions</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4>Communication</h4>
+            <div class="skill-tags">
+              <span>Bilingual (EN/HI)</span>
+              <span>Conflict Resolution</span>
+              <span>Active Listening</span>
+              <span>Stakeholder Mgmt</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4>Operational</h4>
+            <div class="skill-tags">
+              <span>Situational Awareness</span>
+              <span>Composure Under Pressure</span>
+              <span>Adaptability</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">Capabilities Matrix</h2>
+          <div class="cap-list">
+            <div class="cap-item">
+              <div class="cap-title"><span>Interpersonal Comm.</span> <span>95%</span></div>
+              <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 95%"></div></div>
+            </div>
+            <div class="cap-item">
+              <div class="cap-title"><span>Customer Experience</span> <span>94%</span></div>
+              <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 94%"></div></div>
+            </div>
+            <div class="cap-item">
+              <div class="cap-title"><span>Adaptability</span> <span>93%</span></div>
+              <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 93%"></div></div>
+            </div>
+            <div class="cap-item">
+              <div class="cap-title"><span>Emotional Intel.</span> <span>92%</span></div>
+              <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 92%"></div></div>
+            </div>
+            <div class="cap-item">
+              <div class="cap-title"><span>Organization</span> <span>87%</span></div>
+              <div class="cap-bar-bg"><div class="cap-bar-fill" style="width: 87%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" style="margin-top: auto;">
+          <h2 class="section-title">Education</h2>
+          <div class="edu-item">
+            <div class="edu-degree">Higher Secondary Education</div>
+            <div class="edu-school">Khalilabad, Uttar Pradesh</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= PAGE 2 ================= -->
+  <div class="page" id="page-2">
+    
+    <div class="page-body" style="flex-direction: column;">
+      <div class="watermark" style="bottom: 100px; right: 50px;">P</div>
+
+      <div class="section">
+        <h2 class="section-title">What Sets Me Apart</h2>
+        <div class="diff-grid">
+          <div class="diff-card">
+            <h4>Rapid Adaptability</h4>
+            <p>Whether it's a new environment, a new team, or a new industry, I settle in fast. I ask the right questions, observe carefully, and start contributing immediately. Change motivates rather than unsettles me.</p>
+          </div>
+          <div class="diff-card">
+            <h4>Unshakable Composure</h4>
+            <p>From difficult customer interactions to unexpected logistical problems, I do not get flustered. I intuitively slow down, think clearly, and find a way forward, bringing a stabilizing presence to high-pressure situations.</p>
+          </div>
+          <div class="diff-card">
+            <h4>Profound Active Listening</h4>
+            <p>I practice the kind of listening where you actually hear what someone is trying to communicate—even when they struggle to articulate it. This deep awareness allows me to solve the root cause of problems, not just the symptoms.</p>
+          </div>
+          <div class="diff-card">
+            <h4>Exceptional Brand Representation</h4>
+            <p>I carry myself with maturity, polish, and a sharp awareness of how I am perceived. When I represent an organization, stakeholders and clients feel immediate confidence that I reflect the highest standards of the brand.</p>
+          </div>
         </div>
       </div>
 
-      <div class="section">
-        <h2 class="section-title">Core Strengths</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-role">Making People Feel Welcome</div>
-            <div class="timeline-company">People Skills & First Impressions</div>
-            <div class="timeline-desc">I have spent years being the first person someone sees when they walk through a door. I learned quickly that a genuine smile and real attention can completely change someone's experience. I do not follow a script. I read the room, adjust my approach, and make sure every person feels like they matter.</div>
-            <div class="skills-badges">
-              <span>Customer Engagement</span><span>Rapport Building</span><span>Active Listening</span>
-            </div>
+      <div class="section" style="margin-top: 20px;">
+        <h2 class="section-title">Core Professional Values</h2>
+        <div style="display: flex; gap: 40px; margin-top: 10px;">
+          <div style="flex: 1;">
+            <h4 style="font-size: 0.95rem; color: var(--primary); margin-bottom: 5px;">Integrity</h4>
+            <p style="font-size: 0.85rem; line-height: 1.6; color: #555;">Honesty is a default, not a strategy. I prioritize telling clients and colleagues what they need to hear with tact and respect, building a foundation of absolute reliability.</p>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-role">Clear, Calm, and Confident</div>
-            <div class="timeline-company">Communication Under Pressure</div>
-            <div class="timeline-desc">I communicate fluently in both Hindi and English, and I know how to adjust my tone depending on who I am speaking with. A frustrated customer needs patience and empathy. A business client needs clarity and confidence. I switch between these naturally.</div>
-            <div class="skills-badges">
-              <span>Bilingual</span><span>Conflict Resolution</span><span>Stakeholder Communication</span>
-            </div>
+          <div style="flex: 1;">
+            <h4 style="font-size: 0.95rem; color: var(--primary); margin-bottom: 5px;">Excellence</h4>
+            <p style="font-size: 0.85rem; line-height: 1.6; color: #555;">I hold myself to exceptionally high standards, driven by an internal motivation to deliver nothing short of my absolute best in every task, large or small.</p>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-role">Reading Between the Lines</div>
-            <div class="timeline-company">Emotional Intelligence</div>
-            <div class="timeline-desc">Some of the most important things a person tells you are the things they never say out loud. I have learned to pick up on body language, tone shifts, and hesitation. When someone says 'I am fine' but clearly is not, I notice and step in.</div>
-            <div class="skills-badges">
-              <span>Empathy</span><span>Situational Awareness</span><span>Patience</span>
-            </div>
+          <div style="flex: 1;">
+            <h4 style="font-size: 0.95rem; color: var(--primary); margin-bottom: 5px;">Respect</h4>
+            <p style="font-size: 0.85rem; line-height: 1.6; color: #555;">Whether interacting with a senior executive or a first-time visitor, I treat every individual with the same level of profound care, attention, and professional warmth.</p>
           </div>
         </div>
       </div>
 
-      <div class="section">
-        <h2 class="section-title">Professional Values</h2>
-        <div class="values-grid">
-          <div class="value-item">
-            <h4>Integrity</h4>
-            <p>Honesty is not a strategy for me. It's a default. I would rather tell someone what they need to hear than what they want to hear.</p>
-          </div>
-          <div class="value-item">
-            <h4>Excellence</h4>
-            <p>I hold myself to a higher standard than most people my age, because I would not feel right doing less than my best.</p>
-          </div>
-          <div class="value-item">
-            <h4>Growth</h4>
-            <p>I chose to step into the professional world early. It was a decision to learn by doing, and I have not stopped learning since.</p>
-          </div>
-          <div class="value-item">
-            <h4>Respect</h4>
-            <p>Whether it is a senior executive or someone walking in for the first time, I treat every person with the same care and attention.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2 class="section-title">Business Exposure</h2>
-        <div class="narrative">
-          <p>My family runs a real estate business, and I have been part of that world for as long as I can remember. I sat in on meetings where clients were making some of the biggest financial decisions of their lives. I watched how my family handled nervous buyers, impatient sellers, and complicated negotiations.</p>
-          <p>What I took away from all of that was not just how deals get done. It was how <strong>trust gets built</strong>. I saw that the clients who stayed loyal were not the ones who got the best price. They were the ones who felt genuinely cared for. That lesson shaped everything about how I approach professional relationships today.</p>
+      <div class="section" style="margin-top: 30px;">
+        <h2 class="section-title">Professional Philosophy</h2>
+        <div class="philosophy-box">
+          <p>
+            "Every organization's reputation is built one conversation at a time. Every phone call, every handshake, every moment when a customer decides whether they trust you. Those small interactions are where real brand loyalty is won or lost. I take those moments seriously because I know I am not just representing myself—I am representing the people who trusted me to be there."
+          </p>
         </div>
       </div>
 
     </div>
   </div>
+
 </body>
 </html>
