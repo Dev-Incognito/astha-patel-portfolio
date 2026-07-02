@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Astha Patel - Resume</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400;1,600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 
     :root {
       --primary:   #1a1a2e;
@@ -25,7 +25,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       background: #1e1e2e;
       display: flex;
       flex-direction: column;
@@ -112,7 +112,7 @@
       border-bottom: 1px solid rgba(194,114,126,.25);
     }
     .contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .contact-item { display: flex; align-items: flex-start; gap: 9px; font-size: .75rem; font-weight: 300; line-height: 1.4; color: var(--text-d2); }
+    .contact-item { display: flex; align-items: flex-start; gap: 9px; font-size: .75rem; font-weight: 500; line-height: 1.4; color: var(--text-d2); }
     .c-icon { width: 13px; height: 13px; fill: var(--rose); flex-shrink: 0; margin-top: 1px; }
     .contact-item a { color: var(--rose-pale); text-decoration: none; word-break: break-all; }
     .skill-group { margin-bottom: 10px; }
@@ -132,7 +132,7 @@
     .cap-bg { width: 100%; height: 3px; background: rgba(255,255,255,.08); border-radius: 2px; }
     .cap-fill { height: 100%; background: var(--rose); border-radius: 2px; }
     .diff-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .diff-item { position: relative; padding-left: 14px; font-size: .73rem; font-weight: 300; line-height: 1.5; color: var(--text-d2); }
+    .diff-item { position: relative; padding-left: 14px; font-size: .73rem; font-weight: 500; line-height: 1.5; color: var(--text-d2); }
     .diff-item::before { content: '\2736'; position: absolute; left: 0; top: 2px; font-size: .5rem; color: var(--rose); }
     .diff-item strong { color: var(--text-d); font-weight: 600; display: block; font-size: .73rem; }
 
@@ -183,12 +183,12 @@
       margin-bottom: 14px;
     }
     .main-header .summary-blurb {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-style: normal;
-      font-weight: 400;
-      font-size: .88rem;
+      font-weight: 500;
+      font-size: .86rem;
       line-height: 1.7;
-      color: rgba(255,255,255,.75);
+      color: rgba(255,255,255,.8);
       border-left: 2px solid var(--rose);
       padding-left: 14px;
     }
@@ -243,9 +243,9 @@
     .exp-block { margin-bottom: 20px; }
     .exp-block:last-child { margin-bottom: 0; }
     .exp-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
-    .exp-role { font-size: .95rem; font-weight: 600; color: var(--primary); }
+    .exp-role { font-size: .95rem; font-weight: 700; color: var(--primary); }
     .exp-date { font-size: .72rem; font-weight: 600; color: var(--rose); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-    .exp-org { font-family: 'Playfair Display', serif; font-style: italic; font-size: .85rem; color: var(--gray); margin-bottom: 9px; }
+    .exp-org { font-family: 'Montserrat', sans-serif; font-style: normal; font-weight: 600; font-size: .72rem; color: var(--rose); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 9px; }
     .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
     .exp-bullets li { font-size: .82rem; line-height: 1.6; color: #444; padding-left: 16px; position: relative; }
     .exp-bullets li::before { content: '\25B8'; position: absolute; left: 0; top: 0; color: var(--rose); font-size: .7rem; }
@@ -255,21 +255,21 @@
       background: var(--gray-lt); color: var(--gray);
       border: 1px solid var(--line); padding: 3px 9px; border-radius: 3px;
     }
-    .summary-text { font-size: .85rem; line-height: 1.75; color: #444; text-align: justify; }
+    .summary-text { font-size: .85rem; font-weight: 500; line-height: 1.75; color: #333; text-align: justify; }
     .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .diff-card { background: var(--gray-lt); border-top: 3px solid var(--rose); border-radius: 4px; padding: 16px; }
-    .diff-card h4 { font-size: .85rem; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
-    .diff-card p { font-size: .78rem; line-height: 1.6; color: var(--gray); }
+    .diff-card h4 { font-size: .85rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .diff-card p { font-size: .78rem; font-weight: 500; line-height: 1.6; color: var(--gray); }
     .values-row { display: flex; gap: 20px; }
     .val-item { flex: 1; }
-    .val-item h4 { font-size: .85rem; font-weight: 600; color: var(--primary); margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
+    .val-item h4 { font-size: .85rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; display: flex; align-items: center; gap: 6px; }
     .val-item h4::before { content: '\2736'; color: var(--rose); font-size: .6rem; }
-    .val-item p { font-size: .78rem; line-height: 1.6; color: var(--gray); }
+    .val-item p { font-size: .78rem; font-weight: 500; line-height: 1.6; color: var(--gray); }
     .vision-pillars { display: flex; gap: 20px; }
     .vision-pillar { flex: 1; text-align: center; padding: 16px 12px; background: var(--gray-lt); border-radius: 6px; }
     .vision-pillar .v-icon { font-family: 'Cinzel', serif; font-size: .7rem; font-weight: 700; color: var(--rose); letter-spacing: .1em; margin-bottom: 8px; }
-    .vision-pillar h4 { font-size: .82rem; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
-    .vision-pillar p { font-size: .73rem; line-height: 1.55; color: var(--gray); }
+    .vision-pillar h4 { font-size: .82rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .vision-pillar p { font-size: .73rem; font-weight: 500; line-height: 1.55; color: var(--gray); }
     .quote-box {
       background: var(--dark);
       color: var(--text-d);
@@ -287,9 +287,10 @@
       line-height: 1;
     }
     .quote-box p {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: .95rem;
+      font-family: 'Montserrat', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: .88rem;
       line-height: 1.75;
       position: relative;
       z-index: 1;
@@ -397,11 +398,11 @@
       <div class="sb-section">
         <div class="sb-section-title">Background</div>
         <div style="font-size:.78rem;font-weight:600;color:var(--text-d);margin-bottom:6px;">From</div>
-        <div style="font-size:.73rem;font-weight:300;color:var(--text-d2);line-height:1.6;">Khalilabad, Sant Kabir Nagar<br>Uttar Pradesh, India</div>
+        <div style="font-size:.73rem;font-weight:400;color:var(--text-d2);line-height:1.6;">Khalilabad, Sant Kabir Nagar<br>Uttar Pradesh, India</div>
         <div style="font-size:.78rem;font-weight:600;color:var(--text-d);margin-top:12px;margin-bottom:4px;">Age</div>
-        <div style="font-size:.73rem;font-weight:300;color:var(--text-d2);">19 years old</div>
+        <div style="font-size:.73rem;font-weight:400;color:var(--text-d2);">19 years old</div>
         <div style="font-size:.78rem;font-weight:600;color:var(--text-d);margin-top:12px;margin-bottom:4px;">Education</div>
-        <div style="font-size:.73rem;font-weight:300;color:var(--text-d2);line-height:1.6;">
+        <div style="font-size:.73rem;font-weight:400;color:var(--text-d2);line-height:1.6;">
           Higher Secondary<br>
           <span style="color:var(--rose-pale);font-size:.72rem;font-weight:400;">Shree Ram Public School</span><br>
           <span style="color:var(--rose);font-size:.68rem;">Actively growing through experience</span>
@@ -624,7 +625,7 @@
 
       <div class="sb-section" style="margin-top:auto;">
         <div class="sb-section-title">References</div>
-        <div style="font-size:.72rem;font-weight:300;color:var(--text-d2);line-height:1.55;">
+        <div style="font-size:.72rem;font-weight:400;color:var(--text-d2);line-height:1.55;">
           Available upon request from former supervisors and family business associates.
         </div>
       </div>
